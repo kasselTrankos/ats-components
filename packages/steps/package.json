@@ -1,0 +1,23 @@
+{
+  "name": "react-componentes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kasselTrankos/ats-components.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kasselTrankos/ats-components/issues"
+  },
+  "homepage": "https://github.com/kasselTrankos/ats-components#readme"
+}
