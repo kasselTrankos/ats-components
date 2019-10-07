@@ -3,7 +3,6 @@ import React from 'react';
 import {create, act} from 'react-test-renderer';
 import {StepsIrrigation} from './../src';
 describe('<StepsIrrigation>', () => {
-  
   it('renders the correct text', () => {
     let root;
     act(()=> {root = create(<StepsIrrigation />);});
