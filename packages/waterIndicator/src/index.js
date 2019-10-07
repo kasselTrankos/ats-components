@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, View } from 'react-native';
-import { StepsIrrigation} from './steps';
+import { StepsIrrigation} from '@ats-components/steps-irrigation';
 import {vh} from 'react-native-expo-viewport-units';
 const Props = {};
 export class WaterIndicator extends Component<Props> {

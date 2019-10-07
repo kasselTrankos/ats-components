@@ -115,8 +115,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                   "paddingLeft": 5,
                   "paddingRight": 5,
                 },
@@ -136,8 +134,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                 },
               ]
             }
@@ -211,8 +207,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                   "paddingLeft": 5,
                   "paddingRight": 5,
                 },
@@ -232,8 +226,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                 },
               ]
             }
@@ -307,8 +299,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                   "paddingLeft": 5,
                   "paddingRight": 5,
                 },
@@ -328,8 +318,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                 },
               ]
             }
@@ -403,8 +391,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                   "paddingLeft": 5,
                   "paddingRight": 5,
                 },
@@ -424,8 +410,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                 },
               ]
             }
@@ -499,8 +483,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                   "paddingLeft": 5,
                   "paddingRight": 5,
                 },
@@ -520,8 +502,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                 },
               ]
             }
@@ -595,8 +575,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                   "paddingLeft": 5,
                   "paddingRight": 5,
                 },
@@ -616,8 +594,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                 },
               ]
             }
@@ -691,8 +667,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                   "paddingLeft": 5,
                   "paddingRight": 5,
                 },
@@ -712,8 +686,6 @@ exports[`<WaterIndicator> renders the correct text 1`] = `
                 },
                 Object {
                   "color": "#fff",
-                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
-                  "fontSize": 20,
                 },
               ]
             }
