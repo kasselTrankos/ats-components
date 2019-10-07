@@ -1,8 +1,8 @@
 //Component for made little step
 import React, {Component} from 'react';
 import { StyleSheet, View } from 'react-native';
-import { StepsIrrigation} from './steps';
 import {vh} from 'react-native-expo-viewport-units';
+import { Text, Content } from 'native-base';
 const Props = {};
 export class StepsIrrigation extends Component<Props> {
 constructor(props) {
