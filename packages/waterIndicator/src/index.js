@@ -8,14 +8,15 @@ export class WaterIndicator extends Component<Props> {
     super(props);
   }
   render() {
-    const {volumen = 100} = this.props;
+    const {volumen = 100, steps = ['3', '2.5', '2', '1.5', '1', '0.5', '0']} 
+      = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.cube}>
           <View style={{ ...styles.traker, height: `${volumen}%`}} />
           <StepsIrrigation 
             style={styles.steps} 
-            steps={['3', '2.5', '2', '1.5', '1', '0.5', '0']}/>
+            steps={steps}/>
         </View>
       </View>
     );
