@@ -9,6 +9,7 @@ describe('<StepsIrrigation>', () => {
     act(()=> {root = create(<StepsIrrigation />);});
     expect(root.toJSON()).toMatchSnapshot();
   });
+
   it('validate given props', ()=> {
     const prop = [1, 4, 9];
     const text = '???';
