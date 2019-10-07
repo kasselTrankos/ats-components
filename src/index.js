@@ -14,7 +14,7 @@ render() {
     <View style={style}>
       {steps.map((step) =>
         <Content contentContainerStyle={styles.step} 
-          key={`${step}__iriirg`}>
+          key={`${text}-${step}-iriirg`}>
           <Text style={Object.assign({}, styles.text, styles.stepText)}>{text}</Text>
           <Text style={styles.text}>{step}</Text>
         </Content>
