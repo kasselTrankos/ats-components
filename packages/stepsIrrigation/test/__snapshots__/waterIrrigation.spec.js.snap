@@ -1,0 +1,729 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WaterIndicator> renders the correct text 1`] = `
+<View
+  style={
+    Object {
+      "height": 600.3000000000001,
+      "marginBottom": 20,
+      "marginTop": 20,
+      "position": "relative",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "fontSize": 18,
+        "height": "100%",
+        "left": "5%",
+        "position": "relative",
+        "textAlign": "center",
+        "width": "90%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#00C3FF",
+          "borderBottomLeftRadius": 12,
+          "borderBottomRightRadius": 12,
+          "bottom": 0,
+          "height": "100%",
+          "left": 0,
+          "overflow": "hidden",
+          "position": "absolute",
+          "width": "100%",
+          "zIndex": 5,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "height": 300,
+          "left": 0,
+          "top": 0,
+          "width": 70,
+          "zIndex": 9,
+        }
+      }
+    >
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={
+          Array [
+            Object {
+              "padding": undefined,
+            },
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 15,
+            },
+          ]
+        }
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutomaticScroll={true}
+        enableOnAndroid={false}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollIntoView={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        update={[Function]}
+        viewIsInsideTabBar={false}
+      >
+        <View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                  "paddingLeft": 5,
+                  "paddingRight": 5,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            ----
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            3
+          </Text>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={
+          Array [
+            Object {
+              "padding": undefined,
+            },
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 15,
+            },
+          ]
+        }
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutomaticScroll={true}
+        enableOnAndroid={false}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollIntoView={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        update={[Function]}
+        viewIsInsideTabBar={false}
+      >
+        <View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                  "paddingLeft": 5,
+                  "paddingRight": 5,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            ----
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            2.5
+          </Text>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={
+          Array [
+            Object {
+              "padding": undefined,
+            },
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 15,
+            },
+          ]
+        }
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutomaticScroll={true}
+        enableOnAndroid={false}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollIntoView={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        update={[Function]}
+        viewIsInsideTabBar={false}
+      >
+        <View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                  "paddingLeft": 5,
+                  "paddingRight": 5,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            ----
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            2
+          </Text>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={
+          Array [
+            Object {
+              "padding": undefined,
+            },
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 15,
+            },
+          ]
+        }
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutomaticScroll={true}
+        enableOnAndroid={false}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollIntoView={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        update={[Function]}
+        viewIsInsideTabBar={false}
+      >
+        <View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                  "paddingLeft": 5,
+                  "paddingRight": 5,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            ----
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            1.5
+          </Text>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={
+          Array [
+            Object {
+              "padding": undefined,
+            },
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 15,
+            },
+          ]
+        }
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutomaticScroll={true}
+        enableOnAndroid={false}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollIntoView={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        update={[Function]}
+        viewIsInsideTabBar={false}
+      >
+        <View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                  "paddingLeft": 5,
+                  "paddingRight": 5,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            ----
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            1
+          </Text>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={
+          Array [
+            Object {
+              "padding": undefined,
+            },
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 15,
+            },
+          ]
+        }
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutomaticScroll={true}
+        enableOnAndroid={false}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollIntoView={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        update={[Function]}
+        viewIsInsideTabBar={false}
+      >
+        <View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                  "paddingLeft": 5,
+                  "paddingRight": 5,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            ----
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            0.5
+          </Text>
+        </View>
+      </RCTScrollView>
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={
+          Array [
+            Object {
+              "padding": undefined,
+            },
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 15,
+            },
+          ]
+        }
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutomaticScroll={true}
+        enableOnAndroid={false}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollIntoView={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        update={[Function]}
+        viewIsInsideTabBar={false}
+      >
+        <View>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                  "paddingLeft": 5,
+                  "paddingRight": 5,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            ----
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "PT_Sans-Narrow-Web-Regular",
+                  "fontSize": 20,
+                },
+              ]
+            }
+            uppercase={false}
+          >
+            0
+          </Text>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</View>
+`;
