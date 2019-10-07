@@ -3,23 +3,24 @@ import { StyleSheet, View } from 'react-native';
 import { StepsIrrigation} from './steps';
 import {vh} from 'react-native-expo-viewport-units';
 const Props = {};
-export class WaterIndicator extends Component<Props> {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const {volumen = 100, steps = ['3', '2.5', '2', '1.5', '1', '0.5', '0']} 
-      = this.props;
-    return (
-      <View style={styles.container}>
-        <View style={styles.cube}>
-          <View style={{ ...styles.traker, height: `${volumen}%`}} />
-          <StepsIrrigation 
-            style={styles.steps} 
-            steps={steps}/>
-        </View>
-      </View>
-    );
+export class StepsIrrigation extends Component<Props> {
+constructor(props) {
+  super(props);
+}
+
+render() {
+  const { steps = [], style = {}, text='----' } = this.props;
+  
+  return (
+    <View style={style}>
+      {steps.map((step) =>
+        <Content contentContainerStyle={styles.step} 
+          key={`${text}-${step}-iriirg`}>
+          <Text style={Object.assign({}, styles.text, styles.stepText)}>{text}</Text>
+          <Text style={styles.text}>{step}</Text>
+        </Content>
+      )}
+    </View>);
   }
 }
 const styles = StyleSheet.create({
