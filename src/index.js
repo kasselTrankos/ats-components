@@ -10,6 +10,7 @@ constructor(props) {
 
 render() {
   const { steps = [], style = {}, text='----' } = this.props;
+  
   return (
     <View style={style}>
       {steps.map((step) =>
