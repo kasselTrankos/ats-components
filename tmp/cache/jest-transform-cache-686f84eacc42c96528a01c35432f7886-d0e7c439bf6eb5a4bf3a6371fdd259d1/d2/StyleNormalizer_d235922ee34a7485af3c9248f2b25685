@@ -1,0 +1,62 @@
+3d4d3d46802d85959141481321de64d4
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _ShorthandsNormalizerFactory = _interopRequireWildcard(require("./ShorthandsNormalizerFactory"));
+
+var StyleNormalizer = function () {
+  function StyleNormalizer() {
+    (0, _classCallCheck2["default"])(this, StyleNormalizer);
+    this.normalizers = {};
+    this.createNormalizers('margin', [_ShorthandsNormalizerFactory.HORIZONTAL, _ShorthandsNormalizerFactory.VERTICAL, _ShorthandsNormalizerFactory.SIDES]);
+    this.createNormalizers('padding', [_ShorthandsNormalizerFactory.HORIZONTAL, _ShorthandsNormalizerFactory.VERTICAL, _ShorthandsNormalizerFactory.SIDES]);
+    this.createNormalizers('border', [_ShorthandsNormalizerFactory.SIDES], 'Width');
+  }
+
+  (0, _createClass2["default"])(StyleNormalizer, [{
+    key: "createNormalizers",
+    value: function createNormalizers(prop, shorthands) {
+      var _this = this;
+
+      var suffix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      shorthands.forEach(function (shorthand) {
+        var propName = prop + shorthand.type + suffix;
+
+        if (_this.normalizerExists(propName)) {
+          throw Error("Normalizer for '" + propName + "' shorthand already exists");
+        }
+
+        _this.normalizers[propName] = _ShorthandsNormalizerFactory["default"].createNormalizer(prop, shorthand, suffix);
+      });
+    }
+  }, {
+    key: "normalizerExists",
+    value: function normalizerExists(normalizerName) {
+      return !!this.normalizers[normalizerName];
+    }
+  }, {
+    key: "canNormalize",
+    value: function canNormalize(prop) {
+      return this.normalizerExists(prop);
+    }
+  }, {
+    key: "normalize",
+    value: function normalize(prop, val) {
+      return this.normalizers[prop](val);
+    }
+  }]);
+  return StyleNormalizer;
+}();
+
+exports["default"] = StyleNormalizer;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlN0eWxlTm9ybWFsaXplci5qcyJdLCJuYW1lcyI6WyJTdHlsZU5vcm1hbGl6ZXIiLCJub3JtYWxpemVycyIsImNyZWF0ZU5vcm1hbGl6ZXJzIiwiSE9SSVpPTlRBTCIsIlZFUlRJQ0FMIiwiU0lERVMiLCJwcm9wIiwic2hvcnRoYW5kcyIsInN1ZmZpeCIsImZvckVhY2giLCJzaG9ydGhhbmQiLCJwcm9wTmFtZSIsInR5cGUiLCJub3JtYWxpemVyRXhpc3RzIiwiRXJyb3IiLCJTaG9ydGhhbmRzTm9ybWFsaXplckZhY3RvcnkiLCJjcmVhdGVOb3JtYWxpemVyIiwibm9ybWFsaXplck5hbWUiLCJ2YWwiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7QUFBQTs7SUFVcUJBLGU7QUFDbkIsNkJBQWM7QUFBQTtBQUNaLFNBQUtDLFdBQUwsR0FBbUIsRUFBbkI7QUFDQSxTQUFLQyxpQkFBTCxDQUF1QixRQUF2QixFQUFpQyxDQUFDQyx1Q0FBRCxFQUFhQyxxQ0FBYixFQUF1QkMsa0NBQXZCLENBQWpDO0FBQ0EsU0FBS0gsaUJBQUwsQ0FBdUIsU0FBdkIsRUFBa0MsQ0FBQ0MsdUNBQUQsRUFBYUMscUNBQWIsRUFBdUJDLGtDQUF2QixDQUFsQztBQUNBLFNBQUtILGlCQUFMLENBQXVCLFFBQXZCLEVBQWlDLENBQUNHLGtDQUFELENBQWpDLEVBQTBDLE9BQTFDO0FBQ0Q7Ozs7c0NBRWlCQyxJLEVBQU1DLFUsRUFBeUI7QUFBQTs7QUFBQSxVQUFiQyxNQUFhLHVFQUFKLEVBQUk7QUFDL0NELE1BQUFBLFVBQVUsQ0FBQ0UsT0FBWCxDQUFtQixVQUFBQyxTQUFTLEVBQUk7QUFDOUIsWUFBTUMsUUFBUSxHQUFHTCxJQUFJLEdBQUdJLFNBQVMsQ0FBQ0UsSUFBakIsR0FBd0JKLE1BQXpDOztBQUVBLFlBQUksS0FBSSxDQUFDSyxnQkFBTCxDQUFzQkYsUUFBdEIsQ0FBSixFQUFxQztBQUNuQyxnQkFBTUcsS0FBSyxzQkFBb0JILFFBQXBCLGdDQUFYO0FBQ0Q7O0FBRUQsUUFBQSxLQUFJLENBQUNWLFdBQUwsQ0FBaUJVLFFBQWpCLElBQ0VJLHdDQUE0QkMsZ0JBQTVCLENBQTZDVixJQUE3QyxFQUFtREksU0FBbkQsRUFBOERGLE1BQTlELENBREY7QUFFRCxPQVREO0FBVUQ7OztxQ0FFZ0JTLGMsRUFBZ0I7QUFDL0IsYUFBTyxDQUFDLENBQUMsS0FBS2hCLFdBQUwsQ0FBaUJnQixjQUFqQixDQUFUO0FBQ0Q7OztpQ0FFWVgsSSxFQUFNO0FBQ2pCLGFBQU8sS0FBS08sZ0JBQUwsQ0FBc0JQLElBQXRCLENBQVA7QUFDRDs7OzhCQUVTQSxJLEVBQU1ZLEcsRUFBSztBQUNuQixhQUFPLEtBQUtqQixXQUFMLENBQWlCSyxJQUFqQixFQUF1QlksR0FBdkIsQ0FBUDtBQUNEIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFNob3J0aGFuZHNOb3JtYWxpemVyRmFjdG9yeSwge1xuICBTSURFUyxcbiAgSE9SSVpPTlRBTCxcbiAgVkVSVElDQUwsXG59IGZyb20gJy4vU2hvcnRoYW5kc05vcm1hbGl6ZXJGYWN0b3J5JztcblxuLyoqXG4gKiBTdHlsZSBOb3JtYWxpemVyIHVzZXMgU2hvcnRoYW5kc05vcm1hbGl6ZXJDcmVhdG9ycyB0byBjcmVhdGVzIGRpZmZlcmVudCBub3JtYWxpemVyc1xuICogc3BlY2lmaWMgdG8gcHJvcGVydGllcy5cbiAqL1xuZXhwb3J0IGRlZmF1bHQgY2xhc3MgU3R5bGVOb3JtYWxpemVyIHtcbiAgY29uc3RydWN0b3IoKSB7XG4gICAgdGhpcy5ub3JtYWxpemVycyA9IHt9O1xuICAgIHRoaXMuY3JlYXRlTm9ybWFsaXplcnMoJ21hcmdpbicsIFtIT1JJWk9OVEFMLCBWRVJUSUNBTCwgU0lERVNdKTtcbiAgICB0aGlzLmNyZWF0ZU5vcm1hbGl6ZXJzKCdwYWRkaW5nJywgW0hPUklaT05UQUwsIFZFUlRJQ0FMLCBTSURFU10pO1xuICAgIHRoaXMuY3JlYXRlTm9ybWFsaXplcnMoJ2JvcmRlcicsIFtTSURFU10sICdXaWR0aCcpO1xuICB9XG5cbiAgY3JlYXRlTm9ybWFsaXplcnMocHJvcCwgc2hvcnRoYW5kcywgc3VmZml4ID0gJycpIHtcbiAgICBzaG9ydGhhbmRzLmZvckVhY2goc2hvcnRoYW5kID0+IHtcbiAgICAgIGNvbnN0IHByb3BOYW1lID0gcHJvcCArIHNob3J0aGFuZC50eXBlICsgc3VmZml4O1xuXG4gICAgICBpZiAodGhpcy5ub3JtYWxpemVyRXhpc3RzKHByb3BOYW1lKSkge1xuICAgICAgICB0aHJvdyBFcnJvcihgTm9ybWFsaXplciBmb3IgJyR7cHJvcE5hbWV9JyBzaG9ydGhhbmQgYWxyZWFkeSBleGlzdHNgKTtcbiAgICAgIH1cblxuICAgICAgdGhpcy5ub3JtYWxpemVyc1twcm9wTmFtZV0gPVxuICAgICAgICBTaG9ydGhhbmRzTm9ybWFsaXplckZhY3RvcnkuY3JlYXRlTm9ybWFsaXplcihwcm9wLCBzaG9ydGhhbmQsIHN1ZmZpeCk7XG4gICAgfSk7XG4gIH1cblxuICBub3JtYWxpemVyRXhpc3RzKG5vcm1hbGl6ZXJOYW1lKSB7XG4gICAgcmV0dXJuICEhdGhpcy5ub3JtYWxpemVyc1tub3JtYWxpemVyTmFtZV07XG4gIH1cblxuICBjYW5Ob3JtYWxpemUocHJvcCkge1xuICAgIHJldHVybiB0aGlzLm5vcm1hbGl6ZXJFeGlzdHMocHJvcCk7XG4gIH1cblxuICBub3JtYWxpemUocHJvcCwgdmFsKSB7XG4gICAgcmV0dXJuIHRoaXMubm9ybWFsaXplcnNbcHJvcF0odmFsKTtcbiAgfVxufVxuIl19

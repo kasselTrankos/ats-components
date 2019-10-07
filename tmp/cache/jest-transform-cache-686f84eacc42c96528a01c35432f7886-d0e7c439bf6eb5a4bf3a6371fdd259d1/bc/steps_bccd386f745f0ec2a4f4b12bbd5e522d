@@ -1,0 +1,81 @@
+739e0033a27da218b9d3c94153d59a86
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StepsIrrigation = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactNative = require("react-native");
+
+var _nativeBase = require("native-base");
+
+var Props = {};
+
+var StepsIrrigation = function (_Component) {
+  (0, _inherits2["default"])(StepsIrrigation, _Component);
+
+  function StepsIrrigation(props) {
+    (0, _classCallCheck2["default"])(this, StepsIrrigation);
+    return (0, _possibleConstructorReturn2["default"])(this, (0, _getPrototypeOf2["default"])(StepsIrrigation).call(this, props));
+  }
+
+  (0, _createClass2["default"])(StepsIrrigation, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          _this$props$steps = _this$props.steps,
+          steps = _this$props$steps === void 0 ? [] : _this$props$steps,
+          _this$props$style = _this$props.style,
+          style = _this$props$style === void 0 ? {} : _this$props$style;
+      return _react["default"].createElement(_reactNative.View, {
+        style: style
+      }, steps.map(function (step) {
+        return _react["default"].createElement(_nativeBase.Content, {
+          contentContainerStyle: styles.step,
+          key: step + "__iriirg"
+        }, _react["default"].createElement(_nativeBase.Text, {
+          style: (0, _extends2["default"])({}, styles.text, styles.stepText)
+        }, "----"), _react["default"].createElement(_nativeBase.Text, {
+          style: styles.text
+        }, step));
+      }));
+    }
+  }]);
+  return StepsIrrigation;
+}(_react.Component);
+
+exports.StepsIrrigation = StepsIrrigation;
+
+var styles = _reactNative.StyleSheet.create({
+  step: {
+    flexDirection: 'row',
+    paddingBottom: 15
+  },
+  stepText: {
+    paddingRight: 5,
+    paddingLeft: 5
+  },
+  text: {
+    fontFamily: "PT_Sans-Narrow-Web-Regular",
+    color: '#fff',
+    fontSize: 20
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0ZXBzLmpzIl0sIm5hbWVzIjpbIlByb3BzIiwiU3RlcHNJcnJpZ2F0aW9uIiwicHJvcHMiLCJzdGVwcyIsInN0eWxlIiwibWFwIiwic3RlcCIsInN0eWxlcyIsInRleHQiLCJzdGVwVGV4dCIsIkNvbXBvbmVudCIsIlN0eWxlU2hlZXQiLCJjcmVhdGUiLCJmbGV4RGlyZWN0aW9uIiwicGFkZGluZ0JvdHRvbSIsInBhZGRpbmdSaWdodCIsInBhZGRpbmdMZWZ0IiwiZm9udEZhbWlseSIsImNvbG9yIiwiZm9udFNpemUiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBOztBQUNBOztBQUNBOztBQUVBLElBQU1BLEtBQUssR0FBRyxFQUFkOztJQUNhQyxlOzs7QUFDYiwyQkFBWUMsS0FBWixFQUFtQjtBQUFBO0FBQUEsMEhBQ1hBLEtBRFc7QUFFbEI7Ozs7NkJBRVE7QUFBQSx3QkFDNEIsS0FBS0EsS0FEakM7QUFBQSwwQ0FDQ0MsS0FERDtBQUFBLFVBQ0NBLEtBREQsa0NBQ1MsRUFEVDtBQUFBLDBDQUNhQyxLQURiO0FBQUEsVUFDYUEsS0FEYixrQ0FDcUIsRUFEckI7QUFFUCxhQUNFLGdDQUFDLGlCQUFEO0FBQU0sUUFBQSxLQUFLLEVBQUVBO0FBQWIsU0FDR0QsS0FBSyxDQUFDRSxHQUFOLENBQVUsVUFBQ0MsSUFBRDtBQUFBLGVBQ1QsZ0NBQUMsbUJBQUQ7QUFBUyxVQUFBLHFCQUFxQixFQUFFQyxNQUFNLENBQUNELElBQXZDO0FBQ0UsVUFBQSxHQUFHLEVBQUtBLElBQUw7QUFETCxXQUVFLGdDQUFDLGdCQUFEO0FBQU0sVUFBQSxLQUFLLEVBQUUsMEJBQWMsRUFBZCxFQUFrQkMsTUFBTSxDQUFDQyxJQUF6QixFQUErQkQsTUFBTSxDQUFDRSxRQUF0QztBQUFiLGtCQUZGLEVBR0UsZ0NBQUMsZ0JBQUQ7QUFBTSxVQUFBLEtBQUssRUFBRUYsTUFBTSxDQUFDQztBQUFwQixXQUEyQkYsSUFBM0IsQ0FIRixDQURTO0FBQUEsT0FBVixDQURILENBREY7QUFVQzs7O0VBakJrQ0ksZ0I7Ozs7QUFtQnJDLElBQU1ILE1BQU0sR0FBR0ksd0JBQVdDLE1BQVgsQ0FBa0I7QUFDL0JOLEVBQUFBLElBQUksRUFBRTtBQUNKTyxJQUFBQSxhQUFhLEVBQUUsS0FEWDtBQUVKQyxJQUFBQSxhQUFhLEVBQUU7QUFGWCxHQUR5QjtBQUsvQkwsRUFBQUEsUUFBUSxFQUFFO0FBQ1JNLElBQUFBLFlBQVksRUFBRSxDQUROO0FBRVJDLElBQUFBLFdBQVcsRUFBRTtBQUZMLEdBTHFCO0FBUy9CUixFQUFBQSxJQUFJLEVBQUU7QUFDSlMsSUFBQUEsVUFBVSxFQUFFLDRCQURSO0FBRUpDLElBQUFBLEtBQUssRUFBRSxNQUZIO0FBR0pDLElBQUFBLFFBQVEsRUFBQztBQUhMO0FBVHlCLENBQWxCLENBQWYiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHtDb21wb25lbnR9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IFN0eWxlU2hlZXQsIFZpZXcgfSBmcm9tICdyZWFjdC1uYXRpdmUnO1xuaW1wb3J0IHsgVGV4dCwgQ29udGVudCB9IGZyb20gJ25hdGl2ZS1iYXNlJztcblxuY29uc3QgUHJvcHMgPSB7fTtcbmV4cG9ydCBjbGFzcyBTdGVwc0lycmlnYXRpb24gZXh0ZW5kcyBDb21wb25lbnQ8UHJvcHM+IHtcbmNvbnN0cnVjdG9yKHByb3BzKSB7XG4gIHN1cGVyKHByb3BzKTtcbn1cblxucmVuZGVyKCkge1xuICBjb25zdCB7IHN0ZXBzID0gW10sIHN0eWxlID0ge30gfSA9IHRoaXMucHJvcHM7XG4gIHJldHVybiAoXG4gICAgPFZpZXcgc3R5bGU9e3N0eWxlfT5cbiAgICAgIHtzdGVwcy5tYXAoKHN0ZXApID0+XG4gICAgICAgIDxDb250ZW50IGNvbnRlbnRDb250YWluZXJTdHlsZT17c3R5bGVzLnN0ZXB9IFxuICAgICAgICAgIGtleT17YCR7c3RlcH1fX2lyaWlyZ2B9PlxuICAgICAgICAgIDxUZXh0IHN0eWxlPXtPYmplY3QuYXNzaWduKHt9LCBzdHlsZXMudGV4dCwgc3R5bGVzLnN0ZXBUZXh0KX0+LS0tLTwvVGV4dD5cbiAgICAgICAgICA8VGV4dCBzdHlsZT17c3R5bGVzLnRleHR9PntzdGVwfTwvVGV4dD5cbiAgICAgICAgPC9Db250ZW50PlxuICAgICAgKX1cbiAgICA8L1ZpZXc+KTtcbiAgfVxufVxuY29uc3Qgc3R5bGVzID0gU3R5bGVTaGVldC5jcmVhdGUoe1xuICBzdGVwOiB7XG4gICAgZmxleERpcmVjdGlvbjogJ3JvdycsXG4gICAgcGFkZGluZ0JvdHRvbTogMTVcbiAgfSxcbiAgc3RlcFRleHQ6IHtcbiAgICBwYWRkaW5nUmlnaHQ6IDUsXG4gICAgcGFkZGluZ0xlZnQ6IDVcbiAgfSxcbiAgdGV4dDoge1xuICAgIGZvbnRGYW1pbHk6IFwiUFRfU2Fucy1OYXJyb3ctV2ViLVJlZ3VsYXJcIixcbiAgICBjb2xvcjogJyNmZmYnLFxuICAgIGZvbnRTaXplOjIwXG4gIH1cbn0pOyJdfQ==
