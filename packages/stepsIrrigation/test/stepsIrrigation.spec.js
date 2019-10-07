@@ -1,19 +1,19 @@
 import 'react-native';
 import React from 'react';
 import {create, act} from 'react-test-renderer';
-import {WaterIndicator} from './../src';
-import {StepsIrrigation} from './../src/steps';
-describe('<WaterIndicator>', () => {
+import {StepsIrrigation} from './../src';
+describe('<StepsIrrigation>', () => {
   it('renders the correct text', () => {
     let root;
-    act(()=> {root = create(<WaterIndicator />);});
+    act(()=> {root = create(<StepsIrrigation />);});
     expect(root.toJSON()).toMatchSnapshot();
   });
-  it('render shallow read', ()=> {
+  it('validate given props', ()=> {
     const prop = [1, 4, 9];
-    const ins = create(<WaterIndicator steps={prop}/>);
+    const text = '???';
+    const ins = create(<StepsIrrigation steps={prop} text={text}/>);
     const steps = ins.root.findByType(StepsIrrigation);
-    console.log(steps.props.steps);
     expect(steps.props.steps).toEqual(prop);
+    expect(steps.props.text).toEqual(text);
   });
 });
