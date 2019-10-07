@@ -5,10 +5,10 @@ import { WaterIndicator } from '../src/';
 
 describe('<Testable>', () => {
   it('renders the correct text', () => {
-    const value = 'greetings';
-    const pair = 'salutations';
-    const inst = renderer.create(
-      <WaterIndicator />
-    );
+    // const value = 'greetings';
+    // const pair = 'salutations';
+    // const inst = renderer.create(
+    //   <WaterIndicator />
+    // );
   });
 });
