@@ -5,4 +5,4 @@ Frist command git:
 
 use this git cmd's for mono-repo:
 - ```git merge --squash -s subtree --no-commit <BRANCH>```
-- ```git merge --squash -s subtree --no-commit --allow-unrelated-histories <BRANCH>``` 
+- ```- --allow-unrelated-histories <BRANCH>``` 
