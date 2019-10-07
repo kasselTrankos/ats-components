@@ -1,14 +1,17 @@
 {
-  "name": "react-componentes",
+  "name": "@ats-components/water-indicator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kasselTrankos/ats-components.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [],
   "author": "",
