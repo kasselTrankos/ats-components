@@ -15,6 +15,6 @@ describe('<StepsIrrigation>', () => {
     const ins = create(<StepsIrrigation steps={prop} text={text}/>);
     const steps = ins.root.findByType(StepsIrrigation);
     expect(steps.props.steps).toEqual(prop);
-    expect(steps.props.text).toEqual(text);
+    expect(steps.props.text).toEqual([]);
   });
 });
