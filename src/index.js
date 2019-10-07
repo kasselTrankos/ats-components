@@ -1,3 +1,4 @@
+//Component for made little step
 import React, {Component} from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Content } from 'native-base';
