@@ -1,6 +1,6 @@
 {
   "name": "@ats-components/water-indicator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "react-test-renderer": "^16.10.2"
   },
   "dependencies": {
-    "@ats-components/steps-irrigation": "^1.0.4",
+    "@ats-components/steps-irrigation": "^1.0.5",
     "native-base": "^2.13.8",
     "react": "^16.10.2",
     "react-native": "^0.61.2",
