@@ -1,0 +1,16 @@
+2a76beb6fa5a1a2aa67d1e1236766f62
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _reactNative = require("react-native");
+
+var _KeyboardAwareHOC = _interopRequireDefault(require("./KeyboardAwareHOC"));
+
+var _default = (0, _KeyboardAwareHOC["default"])(_reactNative.SectionList);
+
+exports["default"] = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIktleWJvYXJkQXdhcmVTZWN0aW9uTGlzdC5qcyJdLCJuYW1lcyI6WyJTZWN0aW9uTGlzdCJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUVBOztBQUNBOztlQUVlLGtDQUF1QkEsd0JBQXZCLEMiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBAZmxvdyAqL1xuXG5pbXBvcnQgeyBTZWN0aW9uTGlzdCB9IGZyb20gJ3JlYWN0LW5hdGl2ZSdcbmltcG9ydCBsaXN0ZW5Ub0tleWJvYXJkRXZlbnRzIGZyb20gJy4vS2V5Ym9hcmRBd2FyZUhPQydcblxuZXhwb3J0IGRlZmF1bHQgbGlzdGVuVG9LZXlib2FyZEV2ZW50cyhTZWN0aW9uTGlzdClcbiJdfQ==
