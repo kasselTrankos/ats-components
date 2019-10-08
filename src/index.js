@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { StyleSheet, View } from 'react-native';
-import { NavigationScreenProp, NavigationState } from 'react-navigation';
 import { Button, Header, Left, Body, Icon, Title, Right} from 'native-base';
 const Props = {};
 export class Pagination extends Component<Props> {
