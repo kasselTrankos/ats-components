@@ -1,5 +1,8 @@
 # ats's react components
 
+Create branch
+- ```git subtree add some-remote some-tag-or-branch --prefix=shared --squash```
+
 Frist command git:
 - ```git subtree split -P packages/{FOLDER_TO_SPLIT}  -b {BRANCH_NAME}```
 
