@@ -12,3 +12,5 @@ use this git cmd's for mono-repo:
 
 Not use a merge, realy is a pull, becose both repos are same no need to merge it only pull
 - ```git pull -s subtree -Xsubtree=packages/stepsIrrigation/ origin <BRANCH>```
+FORCED 
+- ```git pull -s subtree --allow-unrelated-histories -Xsubtree=packages/stepsIrrigation/ origin <BRANCH>```
