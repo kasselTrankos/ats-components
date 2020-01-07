@@ -24,9 +24,8 @@ export class WaterIndicator extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     position:'relative',
+    flex: 1,
     width: '100%',
-    marginTop: 20,
-    marginBottom:20,
     height: '100%',
   },
   cube: {
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
   },
   step: {
     flexDirection: 'row',
-    paddingBottom: 15
   },
   stepText: {
     color :'#fff',
