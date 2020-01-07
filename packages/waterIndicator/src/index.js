@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
     backgroundColor: '#00C3FF',
-    height: '100vh',
+    height: '100%',
     zIndex: 5,
     left: 0,
     bottom:0,
@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
   steps: {
     left: 0,
     zIndex: 9,
-    top: 0,
-    width: 70,
-    height: 300
+    top: '5%',
+    width: '70%',
+    height: '90%',
   },
   step: {
     flexDirection: 'row',
