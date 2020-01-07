@@ -39,7 +39,6 @@
     "native-base": "^2.13.8",
     "react": "^16.10.2",
     "react-native": "^0.61.2",
-    "react-native-expo-viewport-units": "0.0.8",
     "ws": ">=3.3.1"
   }
 }

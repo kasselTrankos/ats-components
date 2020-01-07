@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, View } from 'react-native';
 import { StepsIrrigation} from '@ats-components/steps-irrigation';
-import {vh} from 'react-native-expo-viewport-units';
 const Props = {};
 export class WaterIndicator extends Component<Props> {
   constructor(props) {
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 20,
     marginBottom:20,
-    height: vh(45)
+    height: '100%',
   },
   cube: {
     position: 'relative',
