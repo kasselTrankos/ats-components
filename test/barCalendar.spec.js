@@ -1,12 +1,12 @@
 import 'react-native';
 import React from 'react';
 import {create, act} from 'react-test-renderer';
-import {barCalendar} from './../src';
-describe('<barCalendar>', () => {
+import {kalendar} from './../src';
+describe('<kalendar>', () => {
   it('renders', () => {
-    console.log(barCalendar)
+    console.log(kalendar)
     let root;
-    act(()=> {root = create(<barCalendar />);});
+    act(()=> {root = create(<kalendar >hola</kalendar>);});
     console.log(root.toJSON());
     expect(root.toJSON()).toMatchSnapshot();
   });

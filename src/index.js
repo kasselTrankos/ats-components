@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Animated, TouchableOpacity,
-  PanResponder, Dimensions } from 'react-native';
-import { Content, Button } from 'native-base';
+import { StyleSheet, View} from 'react-native';
 
 
 const Props = {};
-export class barCalendar extends Component<Props> {
+export class kalendar extends Component<Props> {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
-
+    console.log('noi hahysd');
     return (
-      <Content contentContainerStyle={styles.view}>
-          <View style={styles.header}>
-            <Text style={styles.monthName}>MES</Text>
-          </View>  
-      </Content>
+      <View>
+        <Text style={styles.monthName}>HOLA</Text>
+      </View>
     );
   }
 }
