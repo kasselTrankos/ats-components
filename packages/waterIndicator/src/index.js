@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
     position:'relative',
     flex: 1,
     width: '100%',
+    marginTop: 0,
+    marginBottom:0,
     height: '100%',
   },
   cube: {
