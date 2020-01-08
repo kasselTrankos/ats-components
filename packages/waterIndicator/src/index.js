@@ -7,12 +7,18 @@ export class WaterIndicator extends Component<Props> {
     super(props);
   }
   render() {
-    const {volumen = 100, steps = ['3', '2.5', '2', '1.5', '1', '0.5', '0']} 
-      = this.props;
+    const {
+      volumen = 100,
+      steps = ['3', '2.5', '2', '1.5', '1', '0.5', '0'],
+      fontColor = '#FFF', 
+      fontSize= 18,
+      bgColor = '#00C3FF',
+    } = this.props;
+
     return (
       <View style={styles.container}>
-        <View style={styles.cube}>
-          <View style={{ ...styles.traker, height: `${volumen}%`}} />
+        <View style={{ ...styles.cube, fontColor, fontSize }}>
+          <View style={{ ...styles.traker, bgColor, height: `${volumen}%`}} />
           <StepsIrrigation 
             style={styles.steps} 
             steps={steps}/>
