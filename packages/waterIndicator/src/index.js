@@ -10,16 +10,18 @@ export class WaterIndicator extends Component<Props> {
     const {
       volumen = 100,
       steps = ['3', '2.5', '2', '1.5', '1', '0.5', '0'],
-      fontColor = '#FFF', 
+      color = '#fff', 
       fontSize= 18,
-      bgColor = '#00C3FF',
+      backgroundColor = '#00C3FF',
     } = this.props;
 
     return (
       <View style={styles.container}>
-        <View style={{ ...StyleSheet.flatten(styles.cube), fontColor, fontSize }}>
-          <View style={{ ...StyleSheet.flatten(styles.traker), bgColor, height: `${volumen}%`}} />
-          <StepsIrrigation 
+        <View style={{ ...StyleSheet.flatten(styles.cube) }}>
+          <View style={{ ...StyleSheet.flatten(styles.traker), backgroundColor, height: `${volumen}%`}} />
+          <StepsIrrigation
+            color={color}
+            fontSize={fontSize} 
             style={styles.steps} 
             steps={steps}/>
         </View>
@@ -41,7 +43,6 @@ const styles = StyleSheet.create({
     left: '5%',
     width: '90%',
     height:'100%',
-    fontSize: 18,
     textAlign: 'center',
   }, 
   traker: {

@@ -9,14 +9,19 @@ constructor(props) {
 }
 
 render() {
-  const { steps = [], style = {}, text = '---' } = this.props;
+  const { 
+    steps = [],
+    style = {},
+    color = '#fff',
+    fontSize = 18,
+    text = '---' } = this.props;
   return (
     <View style={style}>
       {steps.map((step) =>
         <Content contentContainerStyle={styles.step} 
           key={`${text}-${step}_iriirg`}>
-          <Text style={Object.assign({}, styles.text, styles.stepText)}>{text}</Text>
-          <Text style={styles.text}>{step}</Text>
+          <Text style={{ ...StyleSheet.flatten(styles.stepText), ...StyleSheet.flatten(styles.text), color, fontSize: parseInt(fontSize) }}>{text}</Text>
+          <Text style={{ ...StyleSheet.flatten(styles.text), color, fontSize: parseInt(fontSize)}}>{step}</Text>
         </Content>
       )}
     </View>);
@@ -32,8 +37,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5
   },
   text: {
-    fontFamily: "PT_Sans-Narrow-Web-Regular",
     color: '#fff',
-    fontSize:20
+    fontSize: 20
   }
 });
