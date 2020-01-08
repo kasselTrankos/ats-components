@@ -17,8 +17,8 @@ export class WaterIndicator extends Component<Props> {
 
     return (
       <View style={styles.container}>
-        <View style={{ ...styles.cube, fontColor, fontSize }}>
-          <View style={{ ...styles.traker, bgColor, height: `${volumen}%`}} />
+        <View style={{ ...StyleSheet.flatten(styles.cube), fontColor, fontSize }}>
+          <View style={{ ...StyleSheet.flatten(styles.traker), bgColor, height: `${volumen}%`}} />
           <StepsIrrigation 
             style={styles.steps} 
             steps={steps}/>
