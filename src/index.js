@@ -1,20 +1,9 @@
-"use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-  result["default"] = mod;
-  return result;
-};
 
-Object.defineProperty(exports, "__esModule", { value: true });
 import React, { Component } from 'react';
 import {
   PanResponder, View
 } from 'react-native';
 import { Svg, G, Defs, Stop, LinearGradient, Circle, Path } from 'react-native-svg';
-const react_native_1 = require("react-native");
-const react_native_svg_1 = require("react-native-svg");
 const CLOCKWISE = "CW";
 const COUNTER_CLOCKWISE = "CCW";
 
