@@ -1,39 +1,14 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View, Text
-} from 'react-native';
-import CircleSlider from './src';
-export default class App extends Component<Props> {
+import {StyleSheet, View, Text} from 'react-native';
+import Slider from './src';
+export default class CircleSlider extends Component<Props> {
   state = {
     value: 1,
-    totalDays: 30,
-    month: '',
     color: '#dee2e3',
-    activeDates: [12, 6, 8, 18]
   };
-  componentDidMount() {
-    this.gettingInformation();
-  }
-
-
-
-
-  gettingInformation = () => {
-    var date = new Date();
-    var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    var value = date.getDate();
-    var totalDays = lastDay.getDate();
-    this.setState({ value: value, totalDays: totalDays, month: month[date.getMonth()] })
-    1
-  }
-  fun = (value) => {
-    this.state.activeDates.indexOf(value) != -1 ? this.setState({ color: '#9281f7' }) : this.setState({ color: '#dee2e3' })
-    this.setState({ value })
-  }
   render() {
-    const {radius = 90,
+    const {
+      radius = 70,
       limit = 60,
       start = 0,
       dotColor = '#9281f7', 
@@ -45,12 +20,13 @@ export default class App extends Component<Props> {
       btnRadius = 14,
       dotSize = 7,
       sliderWidth = 17,
-      fontSize = 80
+      fontSize = 70,
+      marginTop = 40
     } = this.props;
-    const top = (radius / 2) - (fontSize / 2) + sliderWidth * 2;
-    var { value, totalDays} = this.state;
-    return (<View style={styles.container}>
-      <CircleSlider
+    const top = (radius / 2) - (fontSize / 2) + (sliderWidth * 2) - (marginTop / 4);
+    var { value } = this.state;
+    return (<View style={{ ...StyleSheet.flatten(styles.container), marginTop }}>
+      <Slider
         arcDirection={direction}
         backgroundColor={backgroundColor}
         btnRadius={btnRadius}
@@ -62,7 +38,7 @@ export default class App extends Component<Props> {
         startDegree={start}
         maxValue={limit}
         value={value}
-        onValueChange={(value) => this.fun(value)}
+        onValueChange={(value) => this.setState({ value })}
         endGradient={endGradient}
         startGradient={startGradient}/>
         <Text style={{ ...StyleSheet.flatten(styles.text), top, fontSize }}>{value}</Text>
@@ -72,11 +48,13 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     display: 'flex',
     backgroundColor: '#F5FCFF',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    marginTop: 40,
   },
   text: {
     fontSize: 40,

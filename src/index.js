@@ -1,8 +1,7 @@
 
 import React, { Component } from 'react';
-import {
-  PanResponder, View
-} from 'react-native';
+import {PanResponder, View} from 'react-native';
+import {polarToCartesian, cartesianToPolar, getOnPressAngle} from './../lib/math';
 import { Svg, G, Defs, Stop, LinearGradient, Circle, Path } from 'react-native-svg';
 const CLOCKWISE = "CW";
 const COUNTER_CLOCKWISE = "CCW";
@@ -10,43 +9,15 @@ const COUNTER_CLOCKWISE = "CCW";
 export default class CircleSlider extends Component {
   constructor(props) {
     super(props);
-    this.polarToCartesian = (angle) => {
-      const r = this.props.sliderRadius;
-      //const hC = this.props.sliderRadius + this.props.btnRadius;
-      const hC = (this.props.sliderWidth / 2) + this.props.sliderRadius;
-      const a = ((angle - 90) * Math.PI) / 180.0;
-      const x = hC + r * Math.cos(a);
-      const y = hC + r * Math.sin(a);
-      return { x, y };
-    };
-    this.cartesianToPolar = (x, y) => {
-      //const hC = this.props.sliderRadius + this.props.btnRadius;
-      const hC = (this.props.sliderWidth / 2) + this.props.sliderRadius;
-      if (x === 0) {
-        return y > hC ? 0 : 180;
-      }
-      else if (y === 0) {
-        return x > hC ? 90 : 270;
-      }
-      else {
-        const part1 = (Math.atan((y - hC) / (x - hC)) * 180) / Math.PI;
-        const part2 = (x > hC ? 90 : 270);
-        return (Math.round(part1 + part2));
-      }
-    };
     this.handleMeasure = (ox, oy, width, height, px, py) => {
-      console.log(`Width for SVG Layout: ${width}, height: ${height}, px: ${px}, py: ${py}`);
       const center = (this.props.sliderWidth + (this.props.sliderRadius * 2)) / 2;
       this.setState({
         xCenter: px + (this.props.sliderRadius + this.props.btnRadius),
         yCenter: py + (this.props.sliderRadius + this.props.btnRadius),
         measuredBox: this.getBoxBounds(),
         circleCenter: { x: center, y: center }
-      }, () => {
-        if (this.props.onValueChange) {
-          this.props.onValueChange(this.props.startDegree ? this.props.startDegree : 0);
-        }
-      });
+      }, () => this.props.onValueChange 
+        && this.props.onValueChange(this.props.startDegree ? this.props.startDegree : 0));
     };
     this.measureLocation = () => {
       // @ts-ignore
@@ -55,10 +26,10 @@ export default class CircleSlider extends Component {
     this.getOnPressAngle = (x, y) => {
       const xOrigin = this.state.xCenter - (this.props.sliderRadius + this.props.btnRadius);
       const yOrigin = this.state.yCenter - (this.props.sliderRadius + this.props.btnRadius);
-      const a = (this.cartesianToPolar(x - xOrigin, y - yOrigin));
+      const a = (cartesianToPolar(x - xOrigin, y - yOrigin)(this.props));
       const relativeAngle = this.getRelativeAngle(a);
-      const width = this.props.sliderWidth + (this.props.sliderRadius * 2);
       this.setState({ origin: { x: xOrigin, y: yOrigin } });
+
       return { angle: a, relativeAngle };
     };
     this.getRelativeAngle = (angle) => {
@@ -79,7 +50,6 @@ export default class CircleSlider extends Component {
     this.setValue = (value) => {
       const rel = ((value * 360) / this.props.maxValue) % 360;
       const a = this.relativeToAbsoluteAngle(rel) % 360;
-      // console.log(`Setting new angle: ${a}, relativeAngle: ${rel}`);
       this.setState({ angle: a, relativeAngle: rel });
     };
     this.onValueChanged = (value) => {
@@ -107,8 +77,6 @@ export default class CircleSlider extends Component {
         arr.push((degree + (90 * i)) % 360);
       }
       const pointArray = [];
-      const px = this.state.xCenter - (this.props.sliderRadius + this.props.btnRadius);
-      const py = this.state.yCenter - (this.props.sliderRadius + this.props.btnRadius);
       arr.forEach((angle) => {
         let x = (this.props.sliderRadius - (this.props.sliderWidth / 2)) * Math.cos(this.degreeToRadian(angle)) + this.state.circleCenter.x;
         let y = (this.props.sliderRadius - (this.props.sliderWidth / 2)) * Math.sin(this.degreeToRadian(angle)) + this.state.circleCenter.y;
@@ -136,8 +104,6 @@ export default class CircleSlider extends Component {
       circleCenter: { x: 0, y: 0 },
       measuredBox: []
     };
-
-
     if (props.arcDirection !== CLOCKWISE && props.arcDirection !== COUNTER_CLOCKWISE) {
       throw new Error("Prop 'arcDirection' only supports 'CW' or 'CCW', for Clockwise or Counterclockwise");
     }
@@ -146,13 +112,6 @@ export default class CircleSlider extends Component {
       onMoveShouldSetPanResponderCapture: (e, gs) => true,
       onPanResponderMove: (e, gs) => {
         const angles = this.getOnPressAngle(gs.moveX, gs.moveY);
-        /*
-        if (this.state.relativeAngle <= 0) {
-            if (this.props.startDegree ? this.props.startDegree : 0 < angles.angle) {   // TODO: Fix: Value can't go below 0 or higher than max value
-                return;
-            }
-        }
-        */
         this.setState({ angle: angles.angle, relativeAngle: angles.relativeAngle }, () => {
           this.onValueChanged(this.getCurrentValue());
         });
@@ -163,24 +122,16 @@ export default class CircleSlider extends Component {
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.value !== nextProps.value) {
-      // @ts-ignore
-      console.log(`New props value: ${nextProps.value}`);
       this.setValue((nextProps.value !== undefined ? nextProps.value : 0));
     }
   }
   render() {
-    const value = 15
-    const rel = ((value * 360) / this.props.maxValue) % 360;
-    const a = this.relativeToAbsoluteAngle(rel) % 360;
-
-    const my = this.polarToCartesian(a);
-
-
-    const width = this.props.sliderWidth + (this.props.sliderRadius * 2); //(this.props.sliderRadius + this.props.btnRadius) * 2;
+    const width = this.props.sliderWidth + (this.props.sliderRadius * 2);
     const bR = this.props.btnRadius;
     const dR = this.props.sliderRadius;
-    const startCoord = this.polarToCartesian(this.props.startDegree !== undefined ? this.props.startDegree : 0);
-    const endCoord = this.polarToCartesian(this.state.angle);
+    const angle = this.props.startDegree !== undefined ? this.props.startDegree : 0
+    const startCoord = polarToCartesian(angle)(this.props);
+    const endCoord = polarToCartesian(this.state.angle)(this.props);
 
     const radiusX = dR;
     const radiusY = dR;
@@ -189,32 +140,44 @@ export default class CircleSlider extends Component {
     const sweepFlag = this.props.arcDirection === CLOCKWISE ? 1 : 0;
     return (<View>
       <Svg
-        style={{
-          width: '100%'
-        }}
-        onLayout={this.measureLocation} ref="circleslider" width={width} height={width} flex={1}>
+        style={{width: '100%'}}
+        onLayout={this.measureLocation} 
+        ref="circleslider" 
+        width={width} 
+        height={width} 
+        flex={1}>
         <Defs>
           <LinearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
             <Stop offset="0%" stopColor={this.props.startGradient} />
             <Stop offset="100%" stopColor={this.props.endGradient} />
           </LinearGradient>
         </Defs>
-
-        <Circle r={dR} cx={width / 2} cy={width / 2} stroke={this.props.backgroundColor} strokeWidth={this.props.sliderWidth} fill="none" />
-
-        <Path stroke={"url(#gradient1)"} strokeWidth={this.props.sliderWidth} fill="none" strokeLinecap="round" strokeLinejoin="round" d={`M${startCoord.x} ${startCoord.y} A ${radiusX} ${radiusY} ${xAxisRotation} ${largeArc} ${sweepFlag} ${endCoord.x} ${endCoord.y}`} onPressIn={(e) => {
-          const p = e.nativeEvent;
-          const angles = this.getOnPressAngle(p.locationX, p.locationY);
-          this.setState({ angle: angles.angle, relativeAngle: angles.relativeAngle }, () => {
-            const currentValue = this.getCurrentValue();
-            this.outerCirclePressed(currentValue);
-            this.onValueChanged(currentValue);
-          });
-        }} />
+        <Circle 
+          r={dR} 
+          cx={width / 2} 
+          cy={width / 2} 
+          stroke={this.props.backgroundColor} 
+          strokeWidth={this.props.sliderWidth} fill="none" />
+        <Path 
+          stroke={"url(#gradient1)"} 
+          strokeWidth={this.props.sliderWidth} 
+          fill="none" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          d={`M${startCoord.x} ${startCoord.y} A ${radiusX} ${radiusY} ${xAxisRotation} ${largeArc} ${sweepFlag} ${endCoord.x} ${endCoord.y}`} 
+          onPressIn={(e) => {
+            const {locationX, location} = e.nativeEvent;
+            const angles = this.getOnPressAngle(locationX, locationY);
+            this.setState({ angle: angles.angle, relativeAngle: angles.relativeAngle }, () => {
+              const currentValue = this.getCurrentValue();
+              this.outerCirclePressed(currentValue);
+              this.onValueChanged(currentValue);
+            });
+          }} />
 
         <Circle r={dR + ((dR * 25) / 100)} cx={width / 2} cy={width / 2} stroke="none" fill="none" onPressIn={(e) => {
-          const p = e.nativeEvent;
-          const angles = this.getOnPressAngle(p.pageX, p.pageY);
+          const {pageX, pageY} = e.nativeEvent;
+          const angles = this.getOnPressAngle(pageX, pageY);
           this.setState({ angle: angles.angle, relativeAngle: angles.relativeAngle }, () => {
             const currentValue = this.getCurrentValue();
             this.outerCirclePressed(currentValue);
@@ -225,24 +188,15 @@ export default class CircleSlider extends Component {
         <G x={endCoord.x - bR} y={endCoord.y - bR}>
           <Circle r={bR} cx={bR} cy={bR} fill={this.props.btnColor} {...this.panResponder.panHandlers} />
         </G>
-
-
-
-
-        {
-
-          this.state.measuredBox.length > 0 ?
-            <View
-              style={{
-
-                overflow: "visible", position: "absolute", top: this.state.measuredBox[2].y, left: this.state.measuredBox[2].x, width: this.state.measuredBox[0].x - this.state.measuredBox[2].x, height: this.state.measuredBox[1].y - this.state.measuredBox[2].y
-              }}
-            >
-
-              {this.props.component}
-            </View> : null
-        }
-
+        { this.state.measuredBox.length > 0 && <View
+          style={{
+            overflow: "visible", 
+            position: "absolute", 
+            top: this.state.measuredBox[2].y, 
+            left: this.state.measuredBox[2].x, 
+            width: this.state.measuredBox[0].x - this.state.measuredBox[2].x, 
+            height: this.state.measuredBox[1].y - this.state.measuredBox[2].y
+          }}>{this.props.component}</View>}
       </Svg>
     </View>);
   }
