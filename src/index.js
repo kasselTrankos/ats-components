@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import {PanResponder, View} from 'react-native';
-import {polarToCartesian, cartesianToPolar, getOnPressAngle} from './../lib/math';
+import {polarToCartesian, cartesianToPolar} from './../lib/math';
 import { Svg, G, Defs, Stop, LinearGradient, Circle, Path } from 'react-native-svg';
 const CLOCKWISE = "CW";
 const COUNTER_CLOCKWISE = "CCW";
