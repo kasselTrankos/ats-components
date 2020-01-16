@@ -2,7 +2,7 @@
   "name": "@ats-components/slider",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "App.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
