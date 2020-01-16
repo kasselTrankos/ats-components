@@ -9,6 +9,7 @@ const COUNTER_CLOCKWISE = "CCW";
 export default class CircleSlider extends Component {
   constructor(props) {
     super(props);
+    this.cirSlider = React.createRef();
     this.handleMeasure = (ox, oy, width, height, px, py) => {
       const center = (this.props.sliderWidth + (this.props.sliderRadius * 2)) / 2;
       this.setState({
@@ -21,7 +22,7 @@ export default class CircleSlider extends Component {
     };
     this.measureLocation = () => {
       // @ts-ignore
-      this.refs.circleslider.measure(this.handleMeasure);
+      this.cirSlider.current.measure(this.handleMeasure);
     };
     this.getOnPressAngle = (x, y) => {
       const xOrigin = this.state.xCenter - (this.props.sliderRadius + this.props.btnRadius);
@@ -142,7 +143,7 @@ export default class CircleSlider extends Component {
       <Svg
         style={{width: '100%'}}
         onLayout={this.measureLocation} 
-        ref="circleslider" 
+        ref={this.cirSlider} 
         width={width} 
         height={width} 
         flex={1}>
