@@ -1,10 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Circle from './src/Water';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <View style={{
+        width: 90,
+        height: 90,
+        // top: 0,
+        // left: 0,
+        // position: 'absolute',
+        justifyContent: 'space-around',
+        backgroundColor: '#FFF'
+      }}>
+      <Circle />
+
+      </View>
     </View>
   );
 }
