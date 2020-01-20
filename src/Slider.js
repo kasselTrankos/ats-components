@@ -35,12 +35,12 @@ const Slider = props => {
   } = props;
   const radius = (width) / 2;
   const start = {x: radius, y: radius};
-  const viewBox =`${strokeWidth * -1} ${(strokeWidth / 2) * -1 } ${(strokeWidth * 2) + width} ${strokeWidth + width}`;
-  const sd = describeArc(start.x, start.y, radius, 0, 359)
+  const viewBox =`${strokeWidth * -1} ${(strokeWidth / 2) * -1 } ${(strokeWidth * 2 ) + width} ${(strokeWidth) + width}`;
+  const d = describeArc(start.x, start.y, radius + (strokeWidth / 2), 0, 359)
   return <View style={{ width: '100%', height: '100%',}}>
     <Svg height="100%" width="100%" viewBox={viewBox}>
       <Path
-        d={sd}
+        d={d}
         fill="none"
         stroke={strokeColor}
         strokeWidth = {strokeWidth}

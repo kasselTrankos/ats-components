@@ -6,7 +6,7 @@ import WaterManager from './src/WaterManager';
 export default function App() {
   return (
     <View style={styles.container}>
-      <WaterManager />
+      <WaterManager radius={300}  strokeWidth={10}/>
     </View>
   );
 }
@@ -14,7 +14,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 200,
+    height: 300,
     top: 40,
     left: 0,
     position: 'relative',

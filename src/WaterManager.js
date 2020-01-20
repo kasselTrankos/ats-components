@@ -12,8 +12,7 @@ const WaterManager  = props => {
   } = props;
   const width = radius;
   const height = radius;
-  const top = `${100 - volumen}%`;
-  return <View style={{position: 'relative', flex: 1, alignItems: 'center',justifyContent: 'center', width: '100%', height: '100%'}}>
+  return <View style={{position: 'relative', top: 0, flex: 1, alignItems: 'center',justifyContent: 'center', width: '100%', height: '100%'}}>
     <View style={{ ...StyleSheet.flatten(styles.traker), width, height}}>
       <View style={{
           top: 0,
@@ -22,7 +21,7 @@ const WaterManager  = props => {
           width,
           height,
         }}>
-        <Water top={top} backgroundColor="#06AED5" />
+        <Water volumen={100 - volumen} backgroundColor="#06AED5" />
         </View>
         <View style={{position: 'absolute', top: 0, left: 0, height, width,}}>
           <Slider strokeWidth={strokeWidth} strokeColor="#999" width={radius} />
@@ -33,6 +32,8 @@ const WaterManager  = props => {
 };
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
+    flex: 1,top: 190
   },
 });
 

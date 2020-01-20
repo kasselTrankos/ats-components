@@ -5,7 +5,7 @@ import {Svg, Circle, Defs, Mask, Path, Rect, Use} from 'react-native-svg';
 const Water = props => {
   const radius = 50;
   const {
-    top ='0%',
+    volumen ='0%',
     backgroundColor = '#EDC75C',
     
   } = props;
@@ -16,7 +16,7 @@ const Water = props => {
         <Mask 
           id="Mask" 
           x="0" 
-          y={top} 
+          y={volumen} 
           width="100%" 
           height="100%">  
           <Rect
