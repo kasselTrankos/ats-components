@@ -14,7 +14,7 @@ export default function App() {
         justifyContent: 'space-around',
         backgroundColor: '#FFF'
       }}>
-      <Water top="0%" />
+      <Water top="0%" backgroundColor="#06AED5" />
 
       </View>
     </View>

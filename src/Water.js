@@ -6,7 +6,7 @@ const Water = props => {
   const radius = 50;
   const {
     top ='0%',
-    background = '#EDC75C',
+    backgroundColor = '#EDC75C',
     borderWidth = 0,
     borderColor = '#333',
     
@@ -28,7 +28,7 @@ const Water = props => {
             height="100%"
             fill="#fff"
             strokeWidth="0"
-            stroke={background}
+            stroke={backgroundColor}
             maskUnits="userSpaceOnUse"
           />
         </Mask>  
@@ -38,7 +38,7 @@ const Water = props => {
           cx={radius} 
           cy={radius}
           fill-opacity="1"
-          fill={background} />
+          fill={backgroundColor} />
       </Defs>
       <Use href="#Circle" mask="url(#Mask)" />
       {/* <Circle 
