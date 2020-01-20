@@ -10,7 +10,7 @@ const Water = props => {
     
   } = props;
   return (
-    <View style={{ aspectRatio: 1}}>
+    <View style={{ aspectRatio: 1, }}>
       <Svg height="100%" width="100%" viewBox="0 0 100 100" style={{outline: '1px solid red'}}>
       <Defs>  
         <Mask 
