@@ -7,11 +7,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <WaterManager 
-      radius={300} 
+      radius={290} 
       strokeWidth={10} 
       strokeColor="#778DA9"
       fontColor="#3F88C5"
-      fontSize={50}
+      fontSize={80}
+      bulletColor="#EBF2FA"
+      bulletRadius={40}
       waterColor= "#A9CEF4"/>
     </View>
   );

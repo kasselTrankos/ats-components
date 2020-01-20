@@ -1,10 +1,7 @@
 import React, { Componnent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import {Svg, Circle, Defs, Mask, Path, Rect, Use, Line, TextPath} from 'react-native-svg';
 
-// const line = value => <Svg height="100" width="200">
-// <Line x1="60" y1="10" x2="140" y2="10" stroke="#060" />
-// </Svg>
 
 const Water = props => {
   const radius = 50;
@@ -44,9 +41,6 @@ const Water = props => {
       </Defs>
       <Use href="#Circle" mask="url(#Mask)" />
       </Svg>
-      {/* <View style={{position: 'absolute', top: 0, left: 0}}>
-        {sizes.map(line)}
-      </View> */}
     </View>
   );
 }
