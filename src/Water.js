@@ -7,8 +7,6 @@ const Water = props => {
   const {
     top ='0%',
     backgroundColor = '#EDC75C',
-    borderWidth = 0,
-    borderColor = '#333',
     
   } = props;
   return (
@@ -41,11 +39,6 @@ const Water = props => {
           fill={backgroundColor} />
       </Defs>
       <Use href="#Circle" mask="url(#Mask)" />
-      {/* <Circle 
-        r={radius} 
-        cx={radius} 
-        cy={radius} 
-        fill={background} /> */}
       </Svg>
     </View>
   );
