@@ -10,8 +10,8 @@ export default function App() {
       <View style={{
         top: 0,
         position: 'absolute',
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
         // top: 0,
         // left: 0,
         // position: 'absolute',
@@ -19,8 +19,8 @@ export default function App() {
       }}>
       <Water top="0%" backgroundColor="#06AED5" />
       </View>
-      <View style={{position: 'absolute', top: 0, height: 100, width: 100,}}>
-        <Slider />
+      <View style={{position: 'absolute', top: 0, height: 200, width: 200,}}>
+        <Slider strokeWidth={3} strokeColor="#999" width={200} />
       </View>
     </View>
   );
@@ -29,8 +29,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
+    top: 100,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 });
