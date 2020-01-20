@@ -6,7 +6,13 @@ import WaterManager from './src/WaterManager';
 export default function App() {
   return (
     <View style={styles.container}>
-      <WaterManager radius={300}  strokeWidth={10}/>
+      <WaterManager 
+      radius={300} 
+      strokeWidth={10} 
+      strokeColor="#778DA9"
+      fontColor="#3F88C5"
+      fontSize={50}
+      waterColor= "#A9CEF4"/>
     </View>
   );
 }
