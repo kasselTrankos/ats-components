@@ -12,8 +12,8 @@ export default function App() {
       dialWidth = {8}
       dialColor="#5BC0EB"
       dialRadius={20}
-      dialTextSize={20}
-      dialTextColor= "#363636"
+      dialTextSize={14}
+      dialTextColor= "#fff"
       maxDial={180}
       radius={150} 
       strokeWidth={10} 

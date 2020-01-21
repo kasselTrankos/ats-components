@@ -49,14 +49,19 @@ const WaterManager  = props => {
         <Water volumen={100 - volumen} backgroundColor={waterColor} />
       </View>
       <View>
-      <Text style={{flex: 1, position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center', 
+      <Text style={{
+        // flex: 1, 
+        position: 'absolute',
+        // justifyContent: 'center',
+        // alignItems: 'center', 
         fontSize, 
-        width, 
-        top: height / 4, 
+        height: radius,
+        textAlignVertical: 'center',
+        width: '100%', 
+        top: radius/2 + dialRadius, 
         textAlign: 'center', 
-        color: fontColor}}>{`${volumen}%`}</Text>
+        color: fontColor,
+        }}>{`${volumen}%`}</Text>
       </View>
       <View style={{left: -dialRadius, top: 0}}>
         <Slider 

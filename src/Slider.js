@@ -1,6 +1,6 @@
 import React, { Component, useState} from 'react'
-import { PanResponder, View, Dimensions } from 'react-native'
-import Svg, { Path, Circle, G, Text } from 'react-native-svg'
+import { PanResponder, View, Dimensions,Text } from 'react-native'
+import Svg, { Path, Circle, G } from 'react-native-svg'
 
 
 
@@ -93,11 +93,27 @@ const FuncSlider = props => {
             cy={dialRadius}
             fill={dialColor}
             {...panResponder.panHandlers}/>
-          <Text x={dialRadius}
-            y={dialRadius + (dialTextSize / 2)}
-            fontSize={dialTextSize}
-            fill={dialTextColor}
-            textAnchor="middle">{angle}</Text>
+          <View 
+            
+            style={{
+              left: endCoord.x - dialRadius * 2,
+              top: endCoord.y - dialRadius,
+              width: dialRadius * 4, 
+              height: dialRadius * 2,
+              justifyContent: 'center',
+              textAlignVertical: 'center',
+              // backgroundColor: 'lime',
+              // opacity: 0.5,
+            }}>
+                <Text style={{
+                  // backgroundColor: 'red',
+                  textAlign: 'center',
+                  fontSize: dialTextSize,
+                  textAlignVertical:'center',
+                  lineHeight: dialRadius * 2,
+                  color: dialTextColor,
+                  }}>{angle}</Text>
+              </View>
         </G>
       </Svg>);
 };
