@@ -32,19 +32,21 @@ const cartesianToPolar = (x,y, dialRadius, btnRadius) => {
 
 const FuncSlider = props => {
   const {
+    dialColor = '#000',
     dialRadius = 20,
+    dialTextColor = '#fff',
+    dialTextSize = 10,
     dialWidth =  5,
     fillColor = 'none',
     maxDial =  359,
+    onChange = (e)=> {},
     strokeColor = '#fff',
     strokeWidth = 0.5,
-    dialColor = '#000',
     radius = 120,
-    dialTextColor = '#fff',
-    dialTextSize = 10,
     value = 120,
     prefix= '\'\''
   } = props;
+  
   const [angle, setAngle ] = useState(value > maxDial ? maxDial : value);
   const panResponder = React.useMemo(() =>
   PanResponder.create({
@@ -67,7 +69,8 @@ const FuncSlider = props => {
   const startCoord = polarToCartesian(0, radius, dialRadius);
   const endCoord = polarToCartesian(angle, radius, dialRadius);
     return (
-      <Svg
+      <View>
+         <Svg
         width={width}
         height={width}>
         <Circle r={radius}
@@ -109,7 +112,9 @@ const FuncSlider = props => {
             }}>{angle}{prefix}</Text>
           </View>
         </G>
-      </Svg>);
+      </Svg>
+      </View>
+     );
 };
 
 export default FuncSlider;

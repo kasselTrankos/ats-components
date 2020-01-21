@@ -26,11 +26,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    // height: 300,
-    top: 50,
+    top: 30,
     left: 0,
-    position: 'relative',
+    flex: 1,
     alignItems: 'center',
   },
 });
