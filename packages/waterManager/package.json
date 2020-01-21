@@ -11,6 +11,9 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "expo": "~36.0.0",
     "react": "~16.9.0",
@@ -23,5 +26,5 @@
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0"
   },
-  "gitHead": "ee4f46e8850cd4fb3e993a3fe9d9295225c7f3fb"
+  "gitHead": "1514dc0dd0eb3250e5d36f57b00d8706c950b4d1"
 }
