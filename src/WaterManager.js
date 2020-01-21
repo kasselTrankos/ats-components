@@ -7,7 +7,7 @@ import Slider from './Slider';
 
 const WaterManager  = props => {
   const {
-    radius = 200,
+    radius = 110,
     volumen = 100,
     strokeWidth = 3,
     strokeColor = '#A31E27',
@@ -17,6 +17,7 @@ const WaterManager  = props => {
     waterColor= '#A9CEF4',
     bulletRadius = 30,
     bulletColor = '#99A1AE',
+    fillColor = 'none'
   } = props;
   const width = radius - (bulletRadius / 2);
   const height = radius - (bulletRadius / 2);
@@ -51,13 +52,14 @@ const WaterManager  = props => {
         textAlign: 'center', 
         color: fontColor}}>{`${volumen}%`}</Text>
       </View>
-      <View style={{position: 'absolute', top: 0, left: 0, height, width,}}>
+      <View style={{position: 'absolute', top: 0, left: 0}}>
         <Slider 
           bulletRadius={bulletRadius}
           bulletColor={bulletColor}
           strokeWidth={strokeWidth} 
           strokeColor={strokeColor} 
-          width={radius} />
+          fillColor = {fillColor}
+          dialRadius={120} />
       </View>
     </View>
 
