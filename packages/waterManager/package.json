@@ -23,5 +23,5 @@
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0"
   },
-  "gitHead": "3a88b9fa1fe6cb7ffe7e5eacdbbfd452e6800288"
+  "gitHead": "ee4f46e8850cd4fb3e993a3fe9d9295225c7f3fb"
 }
