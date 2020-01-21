@@ -2,7 +2,7 @@
   "name": "@ats-components/water-manager",
   "version": "1.0.3",
   "main": "src/WaterManager.js",
-  "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/watermanager#readme",
+  "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/waterManager#readme",
   "license": "ISC",
   "scripts": {
     "start": "expo start",
@@ -23,5 +23,5 @@
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0"
   },
-  "gitHead": "059102c372b4ea11f05aec322d04f75c0cfd0d07"
+  "gitHead": "3a88b9fa1fe6cb7ffe7e5eacdbbfd452e6800288"
 }
