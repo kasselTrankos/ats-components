@@ -22,5 +22,6 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0"
-  }
+  },
+  "gitHead": "059102c372b4ea11f05aec322d04f75c0cfd0d07"
 }
