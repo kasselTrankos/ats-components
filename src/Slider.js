@@ -37,8 +37,8 @@ const FuncSlider = props => {
     fillColor = 'none',
     xCenter = Dimensions.get('window').width / 2,
     yCenter = Dimensions.get('window').height / 2,
-    min =  0,
-    max =  359,
+    minDial =  0,
+    maxDial =  359,
     strokeColor = '#fff',
     strokeWidth = 0.5,
     dialColor = '#000',
@@ -47,7 +47,7 @@ const FuncSlider = props => {
     dialTextSize = 10,
     value = 120
   } = props;
-  const [angle, setAngle ] = useState(value);
+  const [angle, setAngle ] = useState(value > maxDial ? maxDial : value);
   const panResponder = React.useMemo(() =>
   PanResponder.create({
     onStartShouldSetPanResponder: (e,gs) => true,
@@ -59,10 +59,10 @@ const FuncSlider = props => {
       const yOrigin = yCenter - (radius + dialRadius);
       const a = cartesianToPolar(gs.moveX-xOrigin, gs.moveY-yOrigin, radius, dialRadius);
       
-      if (a <= min) {
-        setAngle(min);
-      } else if (a >= max) {
-        setAngle(max);
+      if (a <= minDial) {
+        setAngle(minDial);
+      } else if (a >= maxDial) {
+        setAngle(maxDial);
       } else {
         setAngle(a);
       }
