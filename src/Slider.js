@@ -48,15 +48,15 @@ const FuncSlider = props => {
   } = props;
   
   const [angle, setAngle ] = useState(value > maxDial ? maxDial : value);
-  const panResponder = React.useMemo(() =>
-  PanResponder.create({
-    onStartShouldSetPanResponder: (e,gs) => true,
-    onStartShouldSetPanResponderCapture: (e,gs) => true,
-    onMoveShouldSetPanResponder: (e,gs) => true,
-    onMoveShouldSetPanResponderCapture: (e,gs) => true,
+  const panResponder = React.useMemo(() => PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponderCapture: () => true,
+    onMoveShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponderCapture: () => true,
     onPanResponderMove: event => {
-      const x = event.nativeEvent.locationX.toFixed(2);
-      const y = event.nativeEvent.locationY.toFixed(2);
+      const {locationX = 0, locationY = 0} = event.nativeEvent;
+      const x = locationX.toFixed(2);
+      const y = locationY.toFixed(2);
       const dx = x - (radius + dialRadius);
       const dy = y - (radius + dialRadius);
       let newAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
@@ -68,53 +68,47 @@ const FuncSlider = props => {
   const width = (radius + dialRadius) * 2;
   const startCoord = polarToCartesian(0, radius, dialRadius);
   const endCoord = polarToCartesian(angle, radius, dialRadius);
-    return (
-      <View>
-         <Svg
-        width={width}
-        height={width}>
-        <Circle r={radius}
-          cx={width / 2}
-          cy={width / 2}
-          stroke={strokeColor}
-          strokeWidth={strokeWidth}
-          fill={fillColor}/>
+  return (<View>
+    <Svg
+      width={width}
+      height={width}>
+      <Circle r={radius}
+        cx={width / 2}
+        cy={width / 2}
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
+        fill={fillColor}/>
+      <Path stroke={dialColor}
+        strokeWidth={dialWidth}
+        fill='none'
+        d={`M${startCoord.x} ${startCoord.y} A ${radius} ${radius} 0 ${angle > 180 ? 1 : 0} 1 ${endCoord.x} ${endCoord.y}`}/>
 
-        <Path stroke={dialColor}
-          strokeWidth={dialWidth}
-          fill='none'
-          d={`M${startCoord.x} ${startCoord.y} A ${radius} ${radius} 0 ${angle > 180 ? 1 : 0} 1 ${endCoord.x} ${endCoord.y}`}/>
-
-        <G x={endCoord.x-dialRadius} y={endCoord.y-dialRadius}>
-          <Circle r={dialRadius}
-            cx={dialRadius}
-            cy={dialRadius}
-            fill={dialColor}
-            {...panResponder.panHandlers}/>
-          <View 
-            style={{
-              left: endCoord.x - dialRadius * 2,
-              top: endCoord.y - dialRadius,
-              width: dialRadius * 4, 
-              height: dialRadius * 2,
-              justifyContent: 'center',
-              textAlignVertical: 'center',
-              // backgroundColor: 'lime',
-              // opacity: 0.5,
-            }}>
-            <Text style={{
-              // backgroundColor: 'red',
-              textAlign: 'center',
-              fontSize: dialTextSize,
-              textAlignVertical:'center',
-              lineHeight: dialRadius * 2,
-              color: dialTextColor,
-            }}>{angle}{prefix}</Text>
-          </View>
-        </G>
-      </Svg>
-      </View>
-     );
+      <G x={endCoord.x-dialRadius} y={endCoord.y-dialRadius}>
+        <Circle r={dialRadius}
+          cx={dialRadius}
+          cy={dialRadius}
+          fill={dialColor}
+          {...panResponder.panHandlers}/>
+        <View 
+          style={{
+            left: endCoord.x - dialRadius * 2,
+            top: endCoord.y - dialRadius,
+            width: dialRadius * 4, 
+            height: dialRadius * 2,
+            justifyContent: 'center',
+            textAlignVertical: 'center',
+          }}>
+          <Text style={{
+            textAlign: 'center',
+            fontSize: dialTextSize,
+            textAlignVertical:'center',
+            lineHeight: dialRadius * 2,
+            color: dialTextColor,
+          }}>{angle}{prefix}</Text>
+        </View>
+      </G>
+    </Svg>
+  </View>);
 };
 
 export default FuncSlider;
