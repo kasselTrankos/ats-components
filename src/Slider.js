@@ -32,22 +32,40 @@ const cartesianToPolar = (x,y, dialRadius, btnRadius) => {
 
 const FuncSlider = props => {
   const {
-    dialRadius = 20,
-    dialWidth =  5,
-    fillColor = 'none',
-    xCenter = Dimensions.get('window').width / 2,
-    yCenter = Dimensions.get('window').height / 2,
-    minDial =  0,
-    maxDial =  359,
-    strokeColor = '#fff',
-    strokeWidth = 0.5,
     dialColor = '#000',
-    radius = 120,
+    dialRadius = 20,
     dialTextColor = '#fff',
     dialTextSize = 10,
+    dialWidth =  5,
+    fillColor = 'none',
+    minDial =  0,
+    maxDial =  359,
+    onChange = (e)=> {},
+    radius = 120,
+    strokeColor = '#fff',
+    strokeWidth = 0.5,
+    xCenter = Dimensions.get('window').width / 2,
+    yCenter = Dimensions.get('window').height / 2,
     value = 120
   } = props;
+  
   const [angle, setAngle ] = useState(value > maxDial ? maxDial : value);
+  const [circleCenterX, setCircleCenterX] = useState(0);
+  const [circleCenterY, setCircleCenterY] = useState(0);
+  const ref = React.useRef(null);
+  const onLayout = () => {
+    console.log(' pppppp ');
+    setCircleCenter();
+  }
+  
+  const setCircleCenter = () => {
+    ref.current.measure((x, y, w, h, px , py) => {
+      const halfOfContainer = dialRadius + radius;
+      console.log('00000', px, py);
+      setCircleCenterY(py + halfOfContainer);
+      setCircleCenterX(px + halfOfContainer);
+    });
+  }
   const panResponder = React.useMemo(() =>
   PanResponder.create({
     onStartShouldSetPanResponder: (e,gs) => true,
@@ -55,16 +73,32 @@ const FuncSlider = props => {
     onMoveShouldSetPanResponder: (e,gs) => true,
     onMoveShouldSetPanResponderCapture: (e,gs) => true,
     onPanResponderMove: (e,gs) => {
+      // console.log(ref.current, '00000000000');
+      // let refX, refY;
+      // ref.current.measure( (fx, fy, width, height, px, py) => {
+      //   // console.log('Component width is: ' + width)
+      //   // console.log('Component height is: ' + height)
+      //   // console.log('X offset to frame: ' + fx)
+      //   // console.log('Y offset to frame: ' + fy)
+      //   // console.log('X offset to page: ' + px)
+      //   // console.log('Y offset to page: ' + py)
+      //   // refX = px;
+      //   // refY = py;
+      //   // console.log(refX, refY, '12222222');
+      //   console.log(px, py, '1111111', xCenter, yCenter);
+      // });   
       const xOrigin = xCenter - (radius + dialRadius);
       const yOrigin = yCenter - (radius + dialRadius);
       const a = cartesianToPolar(gs.moveX-xOrigin, gs.moveY-yOrigin, radius, dialRadius);
-      
       if (a <= minDial) {
         setAngle(minDial);
+        onChange(minDial);
       } else if (a >= maxDial) {
         setAngle(maxDial);
+        onChange(maxDial);
       } else {
         setAngle(a);
+        onChange(a);
       }
     }
   }), []);
@@ -72,9 +106,11 @@ const FuncSlider = props => {
   const startCoord = polarToCartesian(0, radius, dialRadius);
   const endCoord = polarToCartesian(angle, radius, dialRadius);
     return (
-      <Svg
+      <View onLayout={onLayout}>
+         <Svg
         width={width}
-        height={width}>
+        height={width}
+        ref={ref}>
         <Circle r={radius}
           cx={width / 2}
           cy={width / 2}
@@ -94,7 +130,6 @@ const FuncSlider = props => {
             fill={dialColor}
             {...panResponder.panHandlers}/>
           <View 
-            
             style={{
               left: endCoord.x - dialRadius * 2,
               top: endCoord.y - dialRadius,
@@ -105,17 +140,19 @@ const FuncSlider = props => {
               // backgroundColor: 'lime',
               // opacity: 0.5,
             }}>
-                <Text style={{
-                  // backgroundColor: 'red',
-                  textAlign: 'center',
-                  fontSize: dialTextSize,
-                  textAlignVertical:'center',
-                  lineHeight: dialRadius * 2,
-                  color: dialTextColor,
-                  }}>{angle}</Text>
-              </View>
+            <Text style={{
+              // backgroundColor: 'red',
+              textAlign: 'center',
+              fontSize: dialTextSize,
+              textAlignVertical:'center',
+              lineHeight: dialRadius * 2,
+              color: dialTextColor,
+              }}>{angle}</Text>
+            </View>
         </G>
-      </Svg>);
+      </Svg>
+      </View>
+     );
 };
 
 export default FuncSlider;

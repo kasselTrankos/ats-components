@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, TouchableHighlight } from 'react-native';
 import Water from './Water';
 import Slider from './Slider';
 
@@ -8,7 +8,7 @@ import Slider from './Slider';
 const WaterManager  = props => {
   const {
     dialWidth = 9,
-    dialRadius =20,
+    dialRadius = 20,
     dialColor = "#5BC0EB",
     dialTextSize = 19,
     dialTextColor = '#fff',
@@ -18,6 +18,8 @@ const WaterManager  = props => {
     maxDial = 360,
     minDial = 0,
     meterColor = '#333',
+    onChange = (e)=> {}, 
+    onPress = () => {console.log('is presssed')}, 
     radius = 140,
     sizes = [1, 2, 3, 'Empty'],
     strokeWidth = 3,
@@ -28,36 +30,44 @@ const WaterManager  = props => {
   } = props;
   const width = radius * 2;
   const height = radius * 2;
-  return <View style={{
-    position: 'absolute', 
-    top: 0, 
-    flex: 1,
-    width: width + 90,
-    height: height + dialRadius * 2,
-    alignItems: 'center',
-    justifyContent: 'center',}}>
-    <View style={{ width, height: (height + dialRadius * 2), top: 0,}}>
+  return <TouchableHighlight 
+    onPress={onPress}
+    underlayColor="white"
+    style={{
+      position: 'absolute', 
+      top: 0, 
+      flex: 1,
+      width: width + 90,
+      height: height + dialRadius * 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+    <View style={{ width, height: (height + dialRadius * 2), top: 0, backgroundColor:'red'}}>
       <View style={{
           top: dialRadius,
           left: 0,
           position: 'absolute',
-          width: width,
-          height: width,
+          // width: width,
+          // height: width,
         }}>
-        <Water volumen={100 - volumen} backgroundColor={waterColor} />
+        <Water
+          radius={radius}
+          onPress={onPress}
+          volumen={100 - volumen} 
+          backgroundColor={waterColor} />
       </View>
       <View>
-      <Text style={{
-        position: 'absolute',
-        // backgroundColor: 'lime',
-        fontSize, 
-        lineHeight: radius * 2 + dialRadius * 2,
-        textAlignVertical: 'center',
-        width: '100%', 
-        top: 0, 
-        textAlign: 'center', 
-        color: fontColor,
-        }}>{`${volumen}%`}</Text>
+        <Text style={{
+          position: 'absolute',
+          // backgroundColor: 'lime',
+          fontSize, 
+          lineHeight: radius * 2 + dialRadius * 2,
+          textAlignVertical: 'center',
+          width: '100%', 
+          top: 0, 
+          textAlign: 'center', 
+          color: fontColor,
+          }}>{`${volumen}%`}</Text>
       </View>
       <View style={{left: -dialRadius, top: 0}}>
         <Slider 
@@ -70,6 +80,7 @@ const WaterManager  = props => {
           maxDial={maxDial}
           meterColor={meterColor}
           minDial={minDial}
+          onChange={onChange}
           strokeWidth={strokeWidth} 
           strokeColor={strokeColor} 
           radius = {radius}
@@ -77,7 +88,7 @@ const WaterManager  = props => {
       </View>
     </View>
 
-  </View>
+  </TouchableHighlight>
 };
 
 
