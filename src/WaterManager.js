@@ -7,22 +7,27 @@ import Slider from './Slider';
 
 const WaterManager  = props => {
   const {
-    radius = 110,
-    volumen = 100,
-    strokeWidth = 3,
-    strokeColor = '#A31E27',
-    sizes = [1, 2, 3, 'Empty'],
+    btnRadius = 20,
+    bulletColor = '#99A1AE',
+    bulletRadius = 30,
+    dialWidth = 9,
+    dialRadius =20,
+    dialTextSize = 19,
+    dialTextColor = '#fff',
+    fillColor = 'none',
     fontSize = 90,
     fontColor = '#1B263B',
+    meterColor = '#333',
+    radius = 140,
+    sizes = [1, 2, 3, 'Empty'],
+    strokeWidth = 3,
+    strokeColor = '#A31E27',
+    value = 120,
+    volumen = 100,
     waterColor= '#A9CEF4',
-    bulletRadius = 30,
-    bulletColor = '#99A1AE',
-    fillColor = 'none'
   } = props;
-  const width = radius - (bulletRadius / 2);
-  const height = radius - (bulletRadius / 2);
-  const sliderWidth = radius;
-  const sliderHeight = radius;
+  const width = (radius) *2
+  const height = (radius) *2
   return <View style={{
     position: 'relative', 
     top: 0, 
@@ -52,14 +57,20 @@ const WaterManager  = props => {
         textAlign: 'center', 
         color: fontColor}}>{`${volumen}%`}</Text>
       </View>
-      <View style={{position: 'absolute', top: 0, left: 0}}>
+      <View style={{left: -btnRadius, top: -btnRadius}}>
         <Slider 
           bulletRadius={bulletRadius}
           bulletColor={bulletColor}
+          dialRadius={dialRadius}
+          dialTextSize={dialTextSize}
+          dialTextColor={dialTextColor}
+          dialWidth={dialWidth}
+          fillColor = {fillColor}
+          meterColor={meterColor}
           strokeWidth={strokeWidth} 
           strokeColor={strokeColor} 
-          fillColor = {fillColor}
-          dialRadius={120} />
+          radius = {radius}
+          value={value} />
       </View>
     </View>
 
@@ -67,8 +78,8 @@ const WaterManager  = props => {
 };
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    flex: 1,
+    // alignItems: 'center',
+    // flex: 1,
   },
 });
 
