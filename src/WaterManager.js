@@ -12,6 +12,7 @@ const WaterManager  = props => {
     bulletRadius = 30,
     dialWidth = 9,
     dialRadius =20,
+    dialColor = "#5BC0EB",
     dialTextSize = 19,
     dialTextColor = '#fff',
     fillColor = 'none',
@@ -61,6 +62,7 @@ const WaterManager  = props => {
         <Slider 
           bulletRadius={bulletRadius}
           bulletColor={bulletColor}
+          dialColor={dialColor}
           dialRadius={dialRadius}
           dialTextSize={dialTextSize}
           dialTextColor={dialTextColor}

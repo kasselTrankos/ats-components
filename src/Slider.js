@@ -6,24 +6,23 @@ import Svg, { Path, Circle, G, Text } from 'react-native-svg'
 
 
 
-const polarToCartesian = (angle, dialRadius, btnRadius) => {
-  let r = dialRadius;
-  let hC = dialRadius + btnRadius;
-  let a = (angle-90) * Math.PI / 180.0;
+const polarToCartesian = (angle, radius, btnRadius) => {
+  const hC = radius + btnRadius;
+  const a = (angle-90) * Math.PI / 180.0;
 
-  let x = hC + (r * Math.cos(a));
-  let y = hC + (r * Math.sin(a));
-  return {x,y};
+  const x = hC + (radius * Math.cos(a));
+  const y = hC + (radius * Math.sin(a));
+  return {x, y};
 }
 
 const cartesianToPolar = (x,y, dialRadius, btnRadius) => {
   let hC = dialRadius + btnRadius;
 
   if (x === 0) {
-    return y>hC ? 0 : 180;
+    return y > hC ? 0 : 180;
   }
   else if (y === 0) {
-    return x>hC ? 90 : 270;
+    return x > hC ? 90 : 270;
   }
   else {
     return (Math.round((Math.atan((y-hC)/(x-hC)))*180/Math.PI) +
@@ -42,7 +41,7 @@ const FuncSlider = props => {
     max =  359,
     strokeColor = '#fff',
     strokeWidth = 0.5,
-    meterColor = '#000',
+    dialColor = '#000',
     radius = 120,
     dialTextColor = '#fff',
     dialTextSize = 10,
@@ -70,34 +69,32 @@ const FuncSlider = props => {
     }
   }), []);
   const width = (radius + dialRadius) * 2;
-  let bR = dialRadius;
-  let dR = radius;
-  let startCoord = polarToCartesian(0, radius, dialRadius);
-  let endCoord = polarToCartesian(angle, radius, dialRadius);
+  const startCoord = polarToCartesian(0, radius, dialRadius);
+  const endCoord = polarToCartesian(angle, radius, dialRadius);
     return (
       <Svg
         width={width}
         height={width}>
-        <Circle r={dR}
+        <Circle r={radius}
           cx={width / 2}
           cy={width / 2}
           stroke={strokeColor}
           strokeWidth={strokeWidth}
           fill={fillColor}/>
 
-        <Path stroke={meterColor}
+        <Path stroke={dialColor}
           strokeWidth={dialWidth}
           fill='none'
-          d={`M${startCoord.x} ${startCoord.y} A ${dR} ${dR} 0 ${angle>180?1:0} 1 ${endCoord.x} ${endCoord.y}`}/>
+          d={`M${startCoord.x} ${startCoord.y} A ${radius} ${radius} 0 ${angle > 180 ? 1 : 0} 1 ${endCoord.x} ${endCoord.y}`}/>
 
-        <G x={endCoord.x-bR} y={endCoord.y-bR}>
-          <Circle r={bR}
-            cx={bR}
-            cy={bR}
-            fill={meterColor}
+        <G x={endCoord.x-dialRadius} y={endCoord.y-dialRadius}>
+          <Circle r={dialRadius}
+            cx={dialRadius}
+            cy={dialRadius}
+            fill={dialColor}
             {...panResponder.panHandlers}/>
-          <Text x={bR}
-            y={bR+(dialTextSize/2)}
+          <Text x={dialRadius}
+            y={dialRadius + (dialTextSize / 2)}
             fontSize={dialTextSize}
             fill={dialTextColor}
             textAnchor="middle">{angle}</Text>

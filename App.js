@@ -8,10 +8,10 @@ export default function App() {
     <View style={styles.container}>
       <WaterManager 
       dialWidth = {8}
+      dialColor="#5BC0EB"
       dialRadius={20}
       dialTextSize={20}
-      value={120}
-      dialTextColor= "#fff"
+      dialTextColor= "#363636"
       radius={120} 
       strokeWidth={10} 
       strokeColor="#778DA9"
@@ -19,7 +19,7 @@ export default function App() {
       fontSize={80}
       bulletColor="#EBF2FA"
       bulletRadius={40}
-      meterColor="#0F084B"
+      value={120}
       waterColor= "#A9CEF4"/>
     </View>
   );
