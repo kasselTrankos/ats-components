@@ -1,5 +1,9 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "watermanager",
+  "version": "1.0.0",
+  "main": "src/WaterManager.js",
+  "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/watermanager#readme",
+  "license": "ISC",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -12,7 +16,6 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-circle-slider": "^1.1.1",
     "react-native-svg": "^10.1.0",
     "react-native-web": "~0.11.7"
   },
