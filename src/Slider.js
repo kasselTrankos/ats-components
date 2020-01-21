@@ -35,9 +35,6 @@ const FuncSlider = props => {
     dialRadius = 20,
     dialWidth =  5,
     fillColor = 'none',
-    xCenter = Dimensions.get('window').width / 2,
-    yCenter = Dimensions.get('window').height / 2,
-    minDial =  0,
     maxDial =  359,
     strokeColor = '#fff',
     strokeWidth = 0.5,
@@ -45,7 +42,8 @@ const FuncSlider = props => {
     radius = 120,
     dialTextColor = '#fff',
     dialTextSize = 10,
-    value = 120
+    value = 120,
+    prefix= '\'\''
   } = props;
   const [angle, setAngle ] = useState(value > maxDial ? maxDial : value);
   const panResponder = React.useMemo(() =>
@@ -54,18 +52,15 @@ const FuncSlider = props => {
     onStartShouldSetPanResponderCapture: (e,gs) => true,
     onMoveShouldSetPanResponder: (e,gs) => true,
     onMoveShouldSetPanResponderCapture: (e,gs) => true,
-    onPanResponderMove: (e,gs) => {
-      const xOrigin = xCenter - (radius + dialRadius);
-      const yOrigin = yCenter - (radius + dialRadius);
-      const a = cartesianToPolar(gs.moveX-xOrigin, gs.moveY-yOrigin, radius, dialRadius);
+    onPanResponderMove: event => {
+      const x = event.nativeEvent.locationX.toFixed(2);
+      const y = event.nativeEvent.locationY.toFixed(2);
+      const dx = x - (radius + dialRadius);
+      const dy = y - (radius + dialRadius);
+      let newAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+      if  (newAngle < 0) newAngle = 360 + newAngle;
       
-      if (a <= minDial) {
-        setAngle(minDial);
-      } else if (a >= maxDial) {
-        setAngle(maxDial);
-      } else {
-        setAngle(a);
-      }
+      setAngle(Math.round(newAngle));
     }
   }), []);
   const width = (radius + dialRadius) * 2;
@@ -94,7 +89,6 @@ const FuncSlider = props => {
             fill={dialColor}
             {...panResponder.panHandlers}/>
           <View 
-            
             style={{
               left: endCoord.x - dialRadius * 2,
               top: endCoord.y - dialRadius,
@@ -105,15 +99,15 @@ const FuncSlider = props => {
               // backgroundColor: 'lime',
               // opacity: 0.5,
             }}>
-                <Text style={{
-                  // backgroundColor: 'red',
-                  textAlign: 'center',
-                  fontSize: dialTextSize,
-                  textAlignVertical:'center',
-                  lineHeight: dialRadius * 2,
-                  color: dialTextColor,
-                  }}>{angle}</Text>
-              </View>
+            <Text style={{
+              // backgroundColor: 'red',
+              textAlign: 'center',
+              fontSize: dialTextSize,
+              textAlignVertical:'center',
+              lineHeight: dialRadius * 2,
+              color: dialTextColor,
+            }}>{angle}{prefix}</Text>
+          </View>
         </G>
       </Svg>);
 };

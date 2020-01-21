@@ -9,11 +9,11 @@ export default function App() {
       <WaterManager 
       dialWidth = {8}
       dialColor="#5BC0EB"
-      dialRadius={19}
-      dialTextSize={15}
+      dialRadius={32}
+      dialTextSize={22}
       dialTextColor= "#fff"
-      maxDial={180}
-      radius={150} 
+      maxDial={360}
+      radius={140} 
       strokeWidth={10} 
       strokeColor="#3F88C5"
       fontColor="#3F88C5"
