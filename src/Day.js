@@ -5,14 +5,16 @@ import {Svg, Circle} from 'react-native-svg';
 
 const Day = props => {
   const {
+    onPress =()=> {},
     radius = 10,
-    fillColor = '#999',
-    text = 0
+    fillColor = '#AF5D7C',
+    text = 0,
+    selected = false,
   } = props;
   // const width = radius * 2;
-  // console.log(width);
-  return <TouchableOpacity onPress={()=> console.log('00011111')}>
-      <Svg
+  return <TouchableOpacity 
+    onPress={onPress}>
+    <Svg
       style={{}}
       width={radius}
       height={radius}>
@@ -21,7 +23,7 @@ const Day = props => {
         cx={radius /2}
         cy={radius /2}
         fill={fillColor} />
-      <Text style={{top: radius/2, left: radius/2}}>{text}</Text>
+      <Text style={{top: radius/2, left: radius/2, color: '#fff'}}>{text}</Text>
     </Svg>
     
     

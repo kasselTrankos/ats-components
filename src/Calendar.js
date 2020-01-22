@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { useState } from 'react';
   import { View, Dimensions, Text, FlatList, TouchableWithoutFeedback, PanResponder, Vibration } from 'react-native';
 import Day from './Day';
 
@@ -38,21 +38,31 @@ const handleMultiSelection = (locationX, locationY, initialSelectedCellIndex, ce
   return currentSelection; // this.setState({ currentSelection });
 };
 
+const getDay = ({ pageX, pageY }) => {
+  console.log(pageX, pageY , '999999');
+}
 
 const FCalendar = props => {
   const {
-    amount = 30,
+    amount = 3,
     rows = 7,
+    inactiveColor = '#1A1B4B',
+    activeColor = '#2988B1',
+    
   } = props;
+  const [days, setDays] = useState(Array.from({length: amount}, (v, i) => ({
+    selected: false, 
+    key: i,
+    // fillColor: inactiveColor
+  })));
+  
   const {width} = Dimensions.get('window');
   const radius = (width) / rows;
   const panResponde = PanResponder.create({
     onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
     onMoveShouldSetPanResponder: (evt, gestureState) => !(gestureState.dx === 0 && gestureState.dy === 0) ,
     onPanResponderMove: (evt, gs) => {
-      const { pageX, pageY } = evt.nativeEvent;
-      const {dx, dy} = gs;
-      console.log(pageX, pageY, '11111112');
+      getDay(evt.nativeEvent);
       // const { moveX, moveY} = gs;
       // const {
       //   initialSelectedCellIndex,
@@ -70,7 +80,11 @@ const FCalendar = props => {
     onPanResponderTerminate: evt => true,
     onPanResponderRelease: evt => true,
   });
-  // console.log('0000', width, rows, radius);
+  const onPress = index => {
+    days[index].selected = !days[index].selected; 
+    setDays([...days]);
+  }
+  
   return (<View style={{
       flexDirection: 'row',
       flexWrap: 'wrap',
@@ -80,7 +94,13 @@ const FCalendar = props => {
       width: '100%',
       position: 'absolute',
     }} {...panResponde.panHandlers}>
-    {Array(amount).fill(0).map((el, i)=> <Day text={`${i+1}`} radius={radius}/>)}
+    {days.map(({selected, key}, index)=> <Day 
+      onPress={() => onPress(index)}
+      selected={selected}
+      fillColor={ selected ? activeColor : inactiveColor}
+      text={`${key+1}`}
+      key={key}
+      radius={radius} />)}
   </View>);
 }
 
