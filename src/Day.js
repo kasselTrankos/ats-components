@@ -10,18 +10,18 @@ const Day = props => {
     text = 0
   } = props;
   const width = radius * 2;
-  console.log(width);
+  // console.log(width);
   return <TouchableOpacity onPress={()=> console.log('00011111')}>
       <Svg
-      style={{marginRight: 2, marginBottom: 2}}
-      width={width}
-      height={width}>
+      style={{}}
+      width={radius}
+      height={radius}>
       <Circle 
-        r={radius}
-        cx={radius}
-        cy={radius}
+        r={radius /2}
+        cx={radius /2}
+        cy={radius /2}
         fill={fillColor} />
-      <Text>{text}</Text>
+      <Text style={{top: radius/2, left: radius/2}}>{text}</Text>
     </Svg>
     
     
