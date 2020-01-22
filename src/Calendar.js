@@ -50,6 +50,7 @@ const FCalendar = props => {
     activeColor = '#2988B1',
     
   } = props;
+  const [multiSelection, setMultiSelection] = useState(false);
   const [days, setDays] = useState(Array.from({length: amount}, (v, i) => ({
     selected: false, 
     key: i,
@@ -59,8 +60,7 @@ const FCalendar = props => {
   const {width} = Dimensions.get('window');
   const radius = (width) / rows;
   const panResponde = PanResponder.create({
-    onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
-    onMoveShouldSetPanResponder: (evt, gestureState) => !(gestureState.dx === 0 && gestureState.dy === 0) ,
+    onMoveShouldSetPanResponder: () => multiSelection,
     onPanResponderMove: (evt, gs) => {
       getDay(evt.nativeEvent);
       // const { moveX, moveY} = gs;
@@ -83,7 +83,12 @@ const FCalendar = props => {
   const onPress = index => {
     days[index].selected = !days[index].selected; 
     setDays([...days]);
-  }
+  };
+  const onLongPress = index => {
+    Vibration.vibrate(VIBRATION_DURATION);
+    setMultiSelection(true);
+    console.log('click on long press', index);
+  };
   
   return (<View style={{
       flexDirection: 'row',
@@ -96,6 +101,7 @@ const FCalendar = props => {
     }} {...panResponde.panHandlers}>
     {days.map(({selected, key}, index)=> <Day 
       onPress={() => onPress(index)}
+      onLongPress={()=> onLongPress(index)}
       selected={selected}
       fillColor={ selected ? activeColor : inactiveColor}
       text={`${key+1}`}

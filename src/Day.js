@@ -1,19 +1,23 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import {TouchableWithoutFeedback, Text} from 'react-native';
 import {Svg, Circle} from 'react-native-svg';
 
 
 const Day = props => {
   const {
-    onPress =()=> {},
+    onPress= ()=> {},
+    onLongPress= ()=> {}, 
     radius = 10,
     fillColor = '#AF5D7C',
     text = 0,
     selected = false,
+    delayLongPress = 200
   } = props;
   // const width = radius * 2;
-  return <TouchableOpacity 
-    onPress={onPress}>
+  return <TouchableWithoutFeedback 
+    delayLongPress={delayLongPress}
+    onPress={onPress}
+    onLongPress={onLongPress}>
     <Svg
       style={{}}
       width={radius}
@@ -27,7 +31,7 @@ const Day = props => {
     </Svg>
     
     
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
 
 };
 
