@@ -12,7 +12,7 @@ export default function App() {
       dialRadius={32}
       dialTextSize={22}
       dialTextColor= "#fff"
-      maxDial={360}
+      maxDial={60}
       radius={140} 
       strokeWidth={10} 
       strokeColor="#3F88C5"
@@ -33,4 +33,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
