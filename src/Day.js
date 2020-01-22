@@ -9,7 +9,7 @@ const Day = props => {
     fillColor = '#999',
     text = 0
   } = props;
-  const width = radius * 2;
+  // const width = radius * 2;
   // console.log(width);
   return <TouchableOpacity onPress={()=> console.log('00011111')}>
       <Svg

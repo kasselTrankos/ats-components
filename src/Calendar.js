@@ -46,15 +46,41 @@ const FCalendar = props => {
   } = props;
   const {width} = Dimensions.get('window');
   const radius = (width) / rows;
-  console.log('0000', width, rows, radius);
+  const panResponde = PanResponder.create({
+    onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
+    onMoveShouldSetPanResponder: (evt, gestureState) => !(gestureState.dx === 0 && gestureState.dy === 0) ,
+    onPanResponderMove: (evt, gs) => {
+      const { pageX, pageY } = evt.nativeEvent;
+      const {dx, dy} = gs;
+      console.log(pageX, pageY, '11111112');
+      // const { moveX, moveY} = gs;
+      // const {
+      //   initialSelectedCellIndex,
+      //   cellLayout: { width, height}
+      // } = this.state;
+      // const {
+      //   cellsPerRow,
+      //   days
+      // } = this.props;
+      // (locationX, locationY, initialSelectedCellIndex, cellsPerRow, width, height, days)
+      // const currentSelection =  handleMultiSelection(moveX, moveY, initialSelectedCellIndex, cellsPerRow, width, height, days);
+      // this.setState({ currentSelection });
+      // this.handleScroll(locationY);
+    },
+    onPanResponderTerminate: evt => true,
+    onPanResponderRelease: evt => true,
+  });
+  // console.log('0000', width, rows, radius);
   return (<View style={{
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-    backgroundColor: "blue",
-  }}>
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      backgroundColor: "blue",
+      height: 300,
+      width: '100%',
+      position: 'absolute',
+    }} {...panResponde.panHandlers}>
     {Array(amount).fill(0).map((el, i)=> <Day text={`${i+1}`} radius={radius}/>)}
-    
   </View>);
 }
 
