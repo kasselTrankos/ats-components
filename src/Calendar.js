@@ -60,7 +60,8 @@ const FCalendar = props => {
   const {width} = Dimensions.get('window');
   const radius = (width) / rows;
   const panResponde = PanResponder.create({
-    onMoveShouldSetPanResponder: () => multiSelection,
+    onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
+    onMoveShouldSetPanResponder: (evt, gestureState) => !(gestureState.dx === 0 && gestureState.dy === 0) ,
     onPanResponderMove: (evt, gs) => {
       getDay(evt.nativeEvent);
       // const { moveX, moveY} = gs;
