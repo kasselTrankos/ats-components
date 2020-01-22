@@ -8,6 +8,38 @@ const VIBRATION_DURATION = 500;
 const SCROLL_INCREMENTATION = 10;
 const DISTANCE_BEFORE_MANUAL_SCROLL = 50;
 
+const findCellIndex = (locationX, locationY, cellsPerRow, initialSelectedCellIndex, width, height) => {
+
+  const cellToRight = Math.floor(locationX / width);
+  const cellToBottom = Math.floor(locationY / height);
+  const initialRow = Math.floor(initialSelectedCellIndex / cellsPerRow);
+  const row = cellToBottom - initialRow;
+  const currentcellIndex =
+    initialSelectedCellIndex + cellToRight + cellsPerRow  * row;
+  return currentcellIndex;
+};
+
+const handleMultiSelection = (locationX, locationY, initialSelectedCellIndex, cellsPerRow, width, height, days) => {
+  // const { initialSelectedCellIndex } = this.state;
+  // (locationX, locationY, cellsPerRow, initialSelectedCellIndex, width, height)
+  const currentcellIndex = findCellIndex(locationX, locationY, 
+    cellsPerRow, initialSelectedCellIndex, width, height);
+
+  const startIndex = Math.max(Math.min(initialSelectedCellIndex, currentcellIndex), 0);
+  const endIndex = Math.min(
+    Math.max(initialSelectedCellIndex, currentcellIndex),
+    days.length - 1
+  );
+  let currentSelection = [];
+  for (let i = startIndex; i <= endIndex; i++) {
+    currentSelection.push(i);
+  }
+  return currentSelection; // this.setState({ currentSelection });
+};
+
+
+
+
 type Props = {
   days: [],
   onSingleCellSelection: (cellIndex: number) => void,
@@ -105,25 +137,13 @@ export default class Calendar extends Component<Props, State> {
       });
     }
   };
-
-  findCellIndex = (locationX: number, locationY: number) => {
-    const {
-      initialSelectedCellIndex,
-      cellLayout: { width, height },
-    } = this.state;
-
-    const cellToRight = Math.floor(locationX / width);
-    const cellToBottom = Math.floor(locationY / height);
-    const initialRow = Math.floor(initialSelectedCellIndex / this.props.cellsPerRow);
-    const row = cellToBottom - initialRow;
-    const currentcellIndex =
-      initialSelectedCellIndex + cellToRight + this.props.cellsPerRow  * row;
-    return currentcellIndex;
-  };
+  
 
   handleMultiSelection = (locationX: number, locationY: number) => {
     const { initialSelectedCellIndex } = this.state;
-    const currentcellIndex = this.findCellIndex(locationX, locationY);
+    // (locationX, locationY, cellsPerRow, initialSelectedCellIndex, width, height)
+    const currentcellIndex = findCellIndex(locationX, locationY, 
+      this.props.cellsPerRow, this.state.initialSelectedCellIndex, this.state.cellLayout.width, this.state.cellLayout.height);
 
     const startIndex = Math.max(Math.min(initialSelectedCellIndex, currentcellIndex), 0);
     const endIndex = Math.min(
@@ -134,7 +154,6 @@ export default class Calendar extends Component<Props, State> {
     for (let i = startIndex; i <= endIndex; i++) {
       currentSelection.push(i);
     }
-    console.log(currentcellIndex, locationX, locationY, '9999999');
     this.setState({ currentSelection });
   };
 
@@ -163,8 +182,17 @@ export default class Calendar extends Component<Props, State> {
       onPanResponderMove: (evt, gs) => {
         const { locationX, locationY } = evt.nativeEvent;
         const { moveX, moveY} = gs;
-        console.log('66666', gs.moveY, locationY);
-        this.handleMultiSelection(moveX, moveY);
+        const {
+          initialSelectedCellIndex,
+          cellLayout: { width, height}
+        } = this.state;
+        const {
+          cellsPerRow,
+          days
+        } = this.props;
+        // (locationX, locationY, initialSelectedCellIndex, cellsPerRow, width, height, days)
+        const currentSelection =  handleMultiSelection(moveX, moveY, initialSelectedCellIndex, cellsPerRow, width, height, days);
+        this.setState({ currentSelection });
         this.handleScroll(locationY);
       },
       onPanResponderTerminate: evt => this.handlePanResponderEnd(evt.nativeEvent),
@@ -263,7 +291,7 @@ export default class Calendar extends Component<Props, State> {
     });
 
     return (
-      <View style={{backgroundColor: 'red'}} {...this.panResponder.panHandlers}>
+      <View style={{}} {...this.panResponder.panHandlers}>
         <FlatList
           ref={ref => (this.flatList = ref)}
           onLayout={this.onCalendarLayout}
