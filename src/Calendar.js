@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
   import { View, Dimensions, Text, FlatList, TouchableWithoutFeedback, PanResponder, Vibration } from 'react-native';
 import Day from './Day';
 
@@ -8,6 +8,14 @@ const LONG_PRESS_TIMEOUT = 500;
 const VIBRATION_DURATION = 500;
 const SCROLL_INCREMENTATION = 10;
 const DISTANCE_BEFORE_MANUAL_SCROLL = 50;
+
+const findCell = (rows, radius) => (x, y)=> {
+  const right = Math.floor(x / radius);
+  const bottom = Math.floor(y / radius);
+  
+  return right + rows * bottom;;
+};
+
 
 const findCellIndex = (locationX, locationY, cellsPerRow, initialSelectedCellIndex, width, height) => {
 
@@ -44,26 +52,48 @@ const getDay = ({ pageX, pageY }) => {
 
 const FCalendar = props => {
   const {
-    amount = 3,
+    amount = 40,
     rows = 7,
     inactiveColor = '#1A1B4B',
     activeColor = '#2988B1',
     
   } = props;
+  const view = useRef();
   const [multiSelection, setMultiSelection] = useState(false);
-  const [days, setDays] = useState(Array.from({length: amount}, (v, i) => ({
+  const [cellStart, setCellStart] = useState(0);
+  const [top, setTop] = useState(0);
+  const {width} = Dimensions.get('window');
+  const radius = Math.round((width) / rows);
+  const [days, setDays] = useState( Array.from({length: amount}, (v, i) => ({
     selected: false, 
     key: i,
-    // fillColor: inactiveColor
   })));
   
-  const {width} = Dimensions.get('window');
-  const radius = (width) / rows;
+
+  const getCell = findCell(rows, radius)
+  const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>setTop(pageY));
+  const activateDays = (start, end) => days.map((day, index) => ({selected: index >=start && index<=end, key: index}))
   const panResponde = PanResponder.create({
-    onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
+    // prevent children interactuact prevented.
+    onStartShouldSetPanResponderCapture: () => true,
+    onMoveShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponder: (evt, gestureState) => !(gestureState.dx === 0 && gestureState.dy === 0) ,
+    onPanResponderGrant: (evt, gs) => {
+      const { pageX, pageY} = evt.nativeEvent;
+      // console.log('0nly oce');
+      setCellStart(getCell(pageX.toFixed(0), pageY.toFixed(0) - top));
+      setDays([...activateDays(cellStart, cellStart)])
+    },
     onPanResponderMove: (evt, gs) => {
-      getDay(evt.nativeEvent);
+      const { pageX, pageY} = evt.nativeEvent;
+      // console.log(top, pageX, pageY, '2222');
+      const cellEnd =  getCell(pageX.toFixed(0), pageY.toFixed(0) - top);
+      console.log(cellStart, cellEnd);
+      const start = Math.min(cellStart, cellEnd);
+      const end = Math.max(cellStart, cellEnd);
+      setDays([...activateDays(start, end)])
+      // console.log(evt.nativeEvent, '333333');
+      // getDay(evt.nativeEvent);
       // const { moveX, moveY} = gs;
       // const {
       //   initialSelectedCellIndex,
@@ -99,7 +129,10 @@ const FCalendar = props => {
       height: 300,
       width: '100%',
       position: 'absolute',
-    }} {...panResponde.panHandlers}>
+    }}
+    onLayout={onPresent} 
+      ref={view}
+      {...panResponde.panHandlers}>
     {days.map(({selected, key}, index)=> <Day 
       onPress={() => onPress(index)}
       onLongPress={()=> onLongPress(index)}

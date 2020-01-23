@@ -29,8 +29,6 @@ const Day = props => {
         fill={fillColor} />
       <Text style={{top: radius/2, left: radius/2, color: '#fff'}}>{text}</Text>
     </Svg>
-    
-    
     </TouchableWithoutFeedback>
 
 };
