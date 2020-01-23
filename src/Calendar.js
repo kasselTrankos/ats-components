@@ -31,6 +31,7 @@ const FCalendar = props => {
     key: i,
   })));
   const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>{
+    console.log(top, '00000000000');
     setTop(pageY);
     setHeight(height);
   });
@@ -59,7 +60,7 @@ const FCalendar = props => {
         const cellEnd =  getCell(pageX.toFixed(0), _top);
         const start = Math.min(cellStart, cellEnd);
         const end = Math.max(cellStart, cellEnd);
-        console.log(start, end, '777777777 --->',  _top);
+        console.log(start, end, top, '777777777 --->',  _top);
         setDays([...activateDays(start, end)]);
       }
     },
@@ -72,8 +73,12 @@ const FCalendar = props => {
   return (<ScrollView
     onScroll={handleScroll}
       style={{
-        backgroundColor: 'lime', height: 300
-      }}>
+        position: 'absolute',
+        backgroundColor: 'lime', 
+        height: 300
+      }}
+      onLayout={onPresent} 
+      >
         <View style={{
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -82,10 +87,9 @@ const FCalendar = props => {
         // height: 300,
         top: 0,
         width: '100%',
-      // position: 'absolute',
-    }}
-    onLayout={onPresent} 
-      ref={view}
+        // position: 'absolute',
+        }}
+        ref={view}
       {...panResponde.panHandlers}>
     {days.map(({selected, key}, index)=> <Day 
       selected={selected}
