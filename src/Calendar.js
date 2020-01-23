@@ -16,18 +16,6 @@ const findCell = (rows, radius) => (x, y)=> {
   return right + rows * bottom;;
 };
 
-
-const findCellIndex = (locationX, locationY, cellsPerRow, initialSelectedCellIndex, width, height) => {
-
-  const cellToRight = Math.floor(locationX / width);
-  const cellToBottom = Math.floor(locationY / height);
-  const initialRow = Math.floor(initialSelectedCellIndex / cellsPerRow);
-  const row = cellToBottom - initialRow;
-  const currentcellIndex =
-    initialSelectedCellIndex + cellToRight + cellsPerRow  * row;
-  return currentcellIndex;
-};
-
 const handleMultiSelection = (locationX, locationY, initialSelectedCellIndex, cellsPerRow, width, height, days) => {
   // const { initialSelectedCellIndex } = this.state;
   // (locationX, locationY, cellsPerRow, initialSelectedCellIndex, width, height)
@@ -78,35 +66,18 @@ const FCalendar = props => {
     onStartShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponder: (evt, gestureState) => !(gestureState.dx === 0 && gestureState.dy === 0) ,
-    onPanResponderGrant: (evt, gs) => {
-      const { pageX, pageY} = evt.nativeEvent;
-      // console.log('0nly oce');
+    onPanResponderGrant: e => {
+      const { pageX, pageY} = e.nativeEvent;
       setCellStart(getCell(pageX.toFixed(0), pageY.toFixed(0) - top));
       setDays([...activateDays(cellStart, cellStart)])
     },
-    onPanResponderMove: (evt, gs) => {
-      const { pageX, pageY} = evt.nativeEvent;
-      // console.log(top, pageX, pageY, '2222');
+    onPanResponderMove: e => {
+      const { pageX, pageY} = e.nativeEvent;
       const cellEnd =  getCell(pageX.toFixed(0), pageY.toFixed(0) - top);
       console.log(cellStart, cellEnd);
       const start = Math.min(cellStart, cellEnd);
       const end = Math.max(cellStart, cellEnd);
       setDays([...activateDays(start, end)])
-      // console.log(evt.nativeEvent, '333333');
-      // getDay(evt.nativeEvent);
-      // const { moveX, moveY} = gs;
-      // const {
-      //   initialSelectedCellIndex,
-      //   cellLayout: { width, height}
-      // } = this.state;
-      // const {
-      //   cellsPerRow,
-      //   days
-      // } = this.props;
-      // (locationX, locationY, initialSelectedCellIndex, cellsPerRow, width, height, days)
-      // const currentSelection =  handleMultiSelection(moveX, moveY, initialSelectedCellIndex, cellsPerRow, width, height, days);
-      // this.setState({ currentSelection });
-      // this.handleScroll(locationY);
     },
     onPanResponderTerminate: evt => true,
     onPanResponderRelease: evt => true,
