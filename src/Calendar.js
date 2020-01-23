@@ -10,6 +10,24 @@ const findCell = (rows, radius) => (x, y)=> {
   const bottom = Math.floor(y / radius);
   return right + rows * bottom;;
 };
+const getDay = daysInMonth => {
+  let month = 0;
+  return value => {
+    const lessDays = daysInMonth.reduce((acc, current, index)=> {
+      if(index < month) {
+        acc+=current;
+      }
+      return acc;
+    } , 0);
+    if(value -lessDays===daysInMonth[month]) month ++;
+    return value - lessDays; 
+  }
+}
+
+const getDaysMonth = () => {
+  const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
+  return Array.from({length: 12}).map((el, index) => daysInMonth(index+1, new Date().getFullYear()))
+};
 
 const Calendar = props => {
   const {
@@ -20,6 +38,9 @@ const Calendar = props => {
     vibrationDuration = 100
     
   } = props;
+  const daysMonth = getDaysMonth();
+  const day =getDay(daysMonth)
+  console.log(daysMonth)
   const view = useRef();
   const [cellStart, setCellStart] = useState(0);
   const [height, setHeight] = useState(300);
@@ -84,13 +105,13 @@ const Calendar = props => {
     ref={view}
     onLayout={onPresent}
     {...panResponde.panHandlers}>
-      {days.map(({selected, key}, index)=> <Day 
-        onLongPress={handleMultiple}
-        selected={selected}
-        fillColor={ selected ? activeColor : inactiveColor}
-        text={`${key+1}`}
-        key={key}
-        radius={radius} />)}
+    {days.map(({selected, key}, index)=> <Day 
+      onLongPress={handleMultiple}
+      selected={selected}
+      fillColor={ selected ? activeColor : inactiveColor}
+      text={`${day(key+1)}`}
+      key={key}
+      radius={radius} />)}
   </View></ScrollView>);
 }
 
