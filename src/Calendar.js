@@ -74,7 +74,6 @@ const FCalendar = props => {
     onScroll={handleScroll}
       style={{
         position: 'absolute',
-        backgroundColor: 'lime', 
         height: 300
       }}
       onLayout={onPresent} 
@@ -83,7 +82,6 @@ const FCalendar = props => {
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
-        backgroundColor: "blue",
         // height: 300,
         top: 0,
         width: '100%',
