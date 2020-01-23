@@ -4,10 +4,6 @@ import React, { useState, useRef } from 'react';
   import { View, Dimensions, Text, FlatList, TouchableWithoutFeedback, PanResponder, Vibration } from 'react-native';
 import Day from './Day';
 
-const LONG_PRESS_TIMEOUT = 500;
-const VIBRATION_DURATION = 500;
-const SCROLL_INCREMENTATION = 10;
-const DISTANCE_BEFORE_MANUAL_SCROLL = 50;
 
 const findCell = (rows, radius) => (x, y)=> {
   const right = Math.floor(x / radius);
@@ -15,28 +11,6 @@ const findCell = (rows, radius) => (x, y)=> {
   
   return right + rows * bottom;;
 };
-
-const handleMultiSelection = (locationX, locationY, initialSelectedCellIndex, cellsPerRow, width, height, days) => {
-  // const { initialSelectedCellIndex } = this.state;
-  // (locationX, locationY, cellsPerRow, initialSelectedCellIndex, width, height)
-  const currentcellIndex = findCellIndex(locationX, locationY, 
-    cellsPerRow, initialSelectedCellIndex, width, height);
-
-  const startIndex = Math.max(Math.min(initialSelectedCellIndex, currentcellIndex), 0);
-  const endIndex = Math.min(
-    Math.max(initialSelectedCellIndex, currentcellIndex),
-    days.length - 1
-  );
-  let currentSelection = [];
-  for (let i = startIndex; i <= endIndex; i++) {
-    currentSelection.push(i);
-  }
-  return currentSelection; // this.setState({ currentSelection });
-};
-
-const getDay = ({ pageX, pageY }) => {
-  console.log(pageX, pageY , '999999');
-}
 
 const FCalendar = props => {
   const {
@@ -47,50 +21,51 @@ const FCalendar = props => {
     
   } = props;
   const view = useRef();
-  const [multiSelection, setMultiSelection] = useState(false);
   const [cellStart, setCellStart] = useState(0);
   const [top, setTop] = useState(0);
+  const [height, setHeight] = useState(0);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
   const [days, setDays] = useState( Array.from({length: amount}, (v, i) => ({
     selected: false, 
     key: i,
   })));
+  const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>{
+    
+    setTop(pageY);
+    setHeight(height);
+  });
   
+  const inside = (x, y) => x >= top && y <= height +top;
+    
 
   const getCell = findCell(rows, radius)
-  const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>setTop(pageY));
   const activateDays = (start, end) => days.map((day, index) => ({selected: index >=start && index<=end, key: index}))
   const panResponde = PanResponder.create({
     // prevent children interactuact prevented.
-    onStartShouldSetPanResponderCapture: () => true,
-    onMoveShouldSetPanResponderCapture: () => true,
-    onMoveShouldSetPanResponder: (evt, gestureState) => !(gestureState.dx === 0 && gestureState.dy === 0) ,
-    onPanResponderGrant: e => {
-      const { pageX, pageY} = e.nativeEvent;
-      setCellStart(getCell(pageX.toFixed(0), pageY.toFixed(0) - top));
-      setDays([...activateDays(cellStart, cellStart)])
+    onMoveShouldSetPanResponderCapture: ({nativeEvent: {pageX, pageY}}) => inside(pageX, pageY),
+    onPanResponderGrant: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
+      if(inside(pageX, pageY)) {
+        setCellStart(getCell(pageX.toFixed(0), pageY.toFixed(0) - top));
+        setDays([...activateDays(cellStart, cellStart)])
+      }
     },
-    onPanResponderMove: e => {
-      const { pageX, pageY} = e.nativeEvent;
-      const cellEnd =  getCell(pageX.toFixed(0), pageY.toFixed(0) - top);
-      console.log(cellStart, cellEnd);
-      const start = Math.min(cellStart, cellEnd);
-      const end = Math.max(cellStart, cellEnd);
-      setDays([...activateDays(start, end)])
+    onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
+      if(inside(pageX, pageY)) {
+        const cellEnd =  getCell(pageX.toFixed(0), pageY.toFixed(0) - top);
+        const start = Math.min(cellStart, cellEnd);
+        const end = Math.max(cellStart, cellEnd);
+        setDays([...activateDays(start, end)])
+      }
     },
-    onPanResponderTerminate: evt => true,
+    onPanResponderTerminate: evt => {
+      console.log('ACABAA!!!!');
+    },
+    onPanResponderTerminationRequest: () => {
+      console.log('007777777777');
+    },
     onPanResponderRelease: evt => true,
   });
-  const onPress = index => {
-    days[index].selected = !days[index].selected; 
-    setDays([...days]);
-  };
-  const onLongPress = index => {
-    Vibration.vibrate(VIBRATION_DURATION);
-    setMultiSelection(true);
-    console.log('click on long press', index);
-  };
   
   return (<View style={{
       flexDirection: 'row',
@@ -105,8 +80,6 @@ const FCalendar = props => {
       ref={view}
       {...panResponde.panHandlers}>
     {days.map(({selected, key}, index)=> <Day 
-      onPress={() => onPress(index)}
-      onLongPress={()=> onLongPress(index)}
       selected={selected}
       fillColor={ selected ? activeColor : inactiveColor}
       text={`${key+1}`}

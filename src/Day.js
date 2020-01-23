@@ -9,7 +9,6 @@ const Day = props => {
     fillColor = '#AF5D7C',
     text = 0,
   } = props;
-  // const width = radius * 2;
   return <Svg
       style={{}}
       width={radius}
