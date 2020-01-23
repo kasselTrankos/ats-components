@@ -41,6 +41,7 @@ const getDaysMonth = () => {
   return Array.from({length: 12}).map((el, index) => daysInMonth(index+1, new Date().getFullYear()))
 };
 
+
 const Calendar = props => {
   const {
     amount = 200,
@@ -51,6 +52,7 @@ const Calendar = props => {
     vibrationDuration = 100,
     passedDay = '#0f4c75',
     currentDay= '#edf7fa',
+    onDates=()=>{},
     
   } = props;
   const getDate = getDay(getDaysMonth())
@@ -62,7 +64,7 @@ const Calendar = props => {
   const [dragging, setDragging] = useState(true);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
-  const [days, setDays] = useState( Array.from({length: amount}, (v, index) => {
+  const [days, setDays] = useState( Array(amount).fill().map((v, index) => {
     const {day, isToday, isPassed} = getDate(index + 1);
     return {
       selected: false, 
@@ -70,6 +72,15 @@ const Calendar = props => {
       day, isPassed, isToday
     };
   }));
+  const onDatesSelected = () => {
+    const selected = days.filter(({selected}) => selected);
+    onDates([...selected]);
+  };
+  const onPress = key => {
+    days[key].selected = !days[key].selected;
+    setDays([...days]);
+    onDatesSelected();
+  }
   const activateDays = (start, end) => days.map(({selected, key, day, isPassed, isToday}) => ({
     selected: key >=start && key<=end, 
     key, day, isPassed, isToday
@@ -103,7 +114,10 @@ const Calendar = props => {
         const end = Math.max(cellStart, cellEnd);
         setDays([...activateDays(start, end)]);
     },
-    onPanResponderRelease: () => setDragging(true),
+    onPanResponderRelease: () => {
+      setDragging(true);
+      onDatesSelected();
+    },
     onPanResponderTerminationRequest: () => true,
   });
   
@@ -127,6 +141,7 @@ const Calendar = props => {
     {...panResponde.panHandlers}>
     {days.map(({selected, key, day, isToday, isPassed}, index)=> <Day 
       onLongPress={handleMultiple}
+      onPress={onPress}
       selected={selected}
       fillColor={ selected ? activeColor : inactiveColor}
       text={day}
@@ -134,6 +149,7 @@ const Calendar = props => {
       isToday={isToday}
       isPassed={isPassed}
       currentDay={currentDay}
+      dataId={key}
       key={key}
       colorDayText={colorDayText}
       radius={radius} />)}

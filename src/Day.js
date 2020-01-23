@@ -6,11 +6,13 @@ import {Svg, Rect} from 'react-native-svg';
 
 const Day = props => {
   const {
+    dataId = 1,
     colorDayText = '#192965',
     radius = 10,
     fillColor = '#AF5D7C',
     text = 0,
     onLongPress = ()=> {},
+    onPress = () => {},
     isToday = false,
     isPassed = false,
     passedDay = '#0f4c75',
@@ -25,6 +27,7 @@ const Day = props => {
       flex: 1
     }}
     onLongPress={onLongPress}
+    onPress={()=> onPress(dataId)}
   ><Svg
       style={{}}
       width={radius}
