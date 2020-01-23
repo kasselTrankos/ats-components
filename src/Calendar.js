@@ -21,9 +21,9 @@ const FCalendar = props => {
   } = props;
   const view = useRef();
   const [cellStart, setCellStart] = useState(0);
+  const [height, setHeight] = useState(300);
   const [top, setTop] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
-  const [height, setHeight] = useState(0);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
   const [days, setDays] = useState( Array.from({length: amount}, (v, i) => ({
@@ -31,12 +31,11 @@ const FCalendar = props => {
     key: i,
   })));
   const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>{
-    console.log(top, '00000000000');
     setTop(pageY);
     setHeight(height);
   });
   
-  const inside = (x, y) => x >= top && y <= height +top;
+  const inside = (x, y) => console.log(x >= top && y <= height + top, height , top, y) || x >= top && y <= height +top;
   const handleScroll = e => {
     setScrollTop(Number(e.nativeEvent.contentOffset.y));
   }
@@ -74,20 +73,19 @@ const FCalendar = props => {
     onScroll={handleScroll}
       style={{
         position: 'absolute',
-        height: 300
-      }}
-      onLayout={onPresent} 
-      >
-        <View style={{
+        height: 300,
+        width: '100%',
+      }} >
+      <View style={{
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
-        // height: 300,
         top: 0,
         width: '100%',
-        // position: 'absolute',
-        }}
-        ref={view}
+        height: '100%',
+      }}
+      ref={view}
+      onLayout={onPresent}
       {...panResponde.panHandlers}>
     {days.map(({selected, key}, index)=> <Day 
       selected={selected}
