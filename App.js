@@ -6,7 +6,11 @@ import Calendar from "./src/Calendar.js";
 
 
 const App = props => <View style={{top: 40, flex: 1}}>
-    <Calendar/>
+    <Calendar
+      inactiveColor="#f1f9f9"
+      colorDayText = "#192965"
+      passedDay = "#ebe6e6"
+      currentDay= "#9aceff" />
   </View>
 
 export default App;

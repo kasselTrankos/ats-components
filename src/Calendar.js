@@ -10,8 +10,12 @@ const findCell = (rows, radius) => (x, y)=> {
   const bottom = Math.floor(y / radius);
   return right + rows * bottom;;
 };
+const lt = (dateA = new Date()) => dateB => +dateA > +dateB;
 const getDay = daysInMonth => {
   let month = 0;
+  const currentDay = new Date().getDate();
+  const currentMonth = new Date().getMonth();
+  const isPassedDate = lt();
   return value => {
     const lessDays = daysInMonth.reduce((acc, current, index)=> {
       if(index < month) {
@@ -19,8 +23,16 @@ const getDay = daysInMonth => {
       }
       return acc;
     } , 0);
-    if(value -lessDays===daysInMonth[month]) month ++;
-    return value - lessDays; 
+    const day = value - lessDays;
+    const current = new Date(new Date().getFullYear(), month, day);
+    if(day===daysInMonth[month]) month ++;
+
+    return {
+      month: month,
+      day: day,
+      isToday: currentMonth === month && day === currentDay,
+      isPassed: isPassedDate(current)
+    }; 
   }
 }
 
@@ -33,14 +45,15 @@ const Calendar = props => {
   const {
     amount = 200,
     rows = 7,
-    inactiveColor = '#1A1B4B',
+    colorDayText = '#192965',
+    inactiveColor = '#fff',
     activeColor = '#2988B1',
-    vibrationDuration = 100
+    vibrationDuration = 100,
+    passedDay = '#0f4c75',
+    currentDay= '#edf7fa',
     
   } = props;
-  const daysMonth = getDaysMonth();
-  const day =getDay(daysMonth)
-  console.log(daysMonth)
+  const getDate = getDay(getDaysMonth())
   const view = useRef();
   const [cellStart, setCellStart] = useState(0);
   const [height, setHeight] = useState(300);
@@ -49,10 +62,18 @@ const Calendar = props => {
   const [dragging, setDragging] = useState(true);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
-  const [days, setDays] = useState( Array.from({length: amount}, (v, i) => ({
-    selected: false, 
-    key: i,
-  })));
+  const [days, setDays] = useState( Array.from({length: amount}, (v, index) => {
+    const {day, isToday, isPassed} = getDate(index + 1);
+    return {
+      selected: false, 
+      key: index,
+      day, isPassed, isToday
+    };
+  }));
+  const activateDays = (start, end) => days.map(({selected, key, day, isPassed, isToday}) => ({
+    selected: key >=start && key<=end, 
+    key, day, isPassed, isToday
+  }))
   const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>{
     setTop(pageY);
     setHeight(height);
@@ -67,7 +88,6 @@ const Calendar = props => {
     setDragging(false)
   };
   const getCell = findCell(rows, radius);
-  const activateDays = (start, end) => days.map((day, index) => ({selected: index >=start && index<=end, key: index}))
   const panResponde = PanResponder.create({
     // prevent children interactuact prevented.
     onMoveShouldSetPanResponderCapture: ({nativeEvent: {pageX, pageY}}) => inside(pageX, pageY) && !dragging,
@@ -105,12 +125,17 @@ const Calendar = props => {
     ref={view}
     onLayout={onPresent}
     {...panResponde.panHandlers}>
-    {days.map(({selected, key}, index)=> <Day 
+    {days.map(({selected, key, day, isToday, isPassed}, index)=> <Day 
       onLongPress={handleMultiple}
       selected={selected}
       fillColor={ selected ? activeColor : inactiveColor}
-      text={`${day(key+1)}`}
+      text={day}
+      passedDay={passedDay}
+      isToday={isToday}
+      isPassed={isPassed}
+      currentDay={currentDay}
       key={key}
+      colorDayText={colorDayText}
       radius={radius} />)}
   </View></ScrollView>);
 }

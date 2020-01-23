@@ -6,11 +6,17 @@ import {Svg, Rect} from 'react-native-svg';
 
 const Day = props => {
   const {
+    colorDayText = '#192965',
     radius = 10,
     fillColor = '#AF5D7C',
     text = 0,
-    onLongPress = ()=> {}
+    onLongPress = ()=> {},
+    isToday = false,
+    isPassed = false,
+    passedDay = '#0f4c75',
+    currentDay= '#edf7fa',
   } = props;
+  const color = isToday ? currentDay : isPassed? passedDay :  fillColor;
   return <TouchableWithoutFeedback
     style={{
       backgroundColor: 'red',
@@ -28,7 +34,7 @@ const Day = props => {
           y={1}
           width={radius}
           height={radius}
-          fill={fillColor}
+          fill={color}
           rx={8}
         />
       {/* <Circle 
@@ -36,7 +42,7 @@ const Day = props => {
         cx={radius /2}
         cy={radius /2}
         fill={fillColor} /> */}
-      <Text style={{top: radius/2, left: radius/2, color: '#fff'}}>{text}</Text>
+      <Text style={{top: radius/2, left: radius/2, color: colorDayText}}>{text}</Text>
     </Svg></TouchableWithoutFeedback>
 
 };
