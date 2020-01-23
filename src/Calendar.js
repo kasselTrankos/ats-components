@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useState, useRef } from 'react';
-  import { View, Dimensions, PanResponder, ScrollView } from 'react-native';
+  import { View, Dimensions, PanResponder, ScrollView, Vibration } from 'react-native';
 import Day from './Day';
 
 
@@ -17,6 +17,7 @@ const FCalendar = props => {
     rows = 7,
     inactiveColor = '#1A1B4B',
     activeColor = '#2988B1',
+    vibrationDuration = 100
     
   } = props;
   const view = useRef();
@@ -24,15 +25,13 @@ const FCalendar = props => {
   const [height, setHeight] = useState(300);
   const [top, setTop] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
-  const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(true);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
   const [days, setDays] = useState( Array.from({length: amount}, (v, i) => ({
     selected: false, 
     key: i,
   })));
-  const onScrollBeginDrag = () => setDragging(true);
-  const onScrollEndDrag = () => setDragging(false);
   const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>{
     setTop(pageY);
     setHeight(height);
@@ -42,32 +41,28 @@ const FCalendar = props => {
   const handleScroll = e => {
     setScrollTop(Number(e.nativeEvent.contentOffset.y));
   }
-
-  const getCell = findCell(rows, radius)
+  const handleMultiple = ()=> {
+    Vibration.vibrate(vibrationDuration);
+    setDragging(false)
+  };
+  const getCell = findCell(rows, radius);
   const activateDays = (start, end) => days.map((day, index) => ({selected: index >=start && index<=end, key: index}))
   const panResponde = PanResponder.create({
     // prevent children interactuact prevented.
-    onMoveShouldSetPanResponderCapture: ({nativeEvent: {pageX, pageY}}) => inside(pageX, pageY),
+    onMoveShouldSetPanResponderCapture: ({nativeEvent: {pageX, pageY}}) => inside(pageX, pageY) && !dragging,
     onPanResponderGrant: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
-      if(inside(pageX, pageY) && !dragging) {
-        const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
-        setCellStart(getCell(pageX.toFixed(0), _top));
-        setDays([...activateDays(cellStart, cellStart)])
-      }
+      const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
+      setCellStart(getCell(pageX.toFixed(0), _top));
+      setDays([...activateDays(cellStart, cellStart)])
     },
-    onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}} ,{moveX, moveY}) => {
-      if(inside(pageX, pageY) && !dragging) {
+    onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
         const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
-
         const cellEnd =  getCell(pageX.toFixed(0), _top);
         const start = Math.min(cellStart, cellEnd);
         const end = Math.max(cellStart, cellEnd);
         setDays([...activateDays(start, end)]);
-      }
     },
-    onPanResponderTerminate: evt => {
-      console.log('ACABAA!!!!');
-    },
+    onPanResponderRelease: () => setDragging(true),
     onPanResponderTerminationRequest: () => true,
   });
   
@@ -77,9 +72,7 @@ const FCalendar = props => {
       position: 'absolute',
       height: 300,
       width: '100%',
-    }} 
-    onScrollBeginDrag={onScrollBeginDrag}
-    onScrollEndDrag={onScrollEndDrag}>
+    }}>
     <View style={{
       flexDirection: 'row',
       flexWrap: 'wrap',
@@ -92,6 +85,7 @@ const FCalendar = props => {
     onLayout={onPresent}
     {...panResponde.panHandlers}>
       {days.map(({selected, key}, index)=> <Day 
+        onLongPress={handleMultiple}
         selected={selected}
         fillColor={ selected ? activeColor : inactiveColor}
         text={`${key+1}`}

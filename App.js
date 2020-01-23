@@ -7,9 +7,7 @@ import CalendarDay from "./src/CalendarDay.js";
 
 
 const App = props => <View style={{top: 40, flex: 1}}>
-    <FCalendar
-      inactiveColor="#1A1B4B"
-      activeColor="#2988B1" />
+    <FCalendar/>
   </View>
 
 export default App;
