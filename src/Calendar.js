@@ -1,20 +1,19 @@
 // @flow
 
 import React, { useState, useRef } from 'react';
-  import { View, Dimensions, Text, FlatList, TouchableWithoutFeedback, PanResponder, Vibration } from 'react-native';
+  import { View, Dimensions, PanResponder, ScrollView } from 'react-native';
 import Day from './Day';
 
 
 const findCell = (rows, radius) => (x, y)=> {
   const right = Math.floor(x / radius);
   const bottom = Math.floor(y / radius);
-  
   return right + rows * bottom;;
 };
 
 const FCalendar = props => {
   const {
-    amount = 40,
+    amount = 200,
     rows = 7,
     inactiveColor = '#1A1B4B',
     activeColor = '#2988B1',
@@ -23,6 +22,7 @@ const FCalendar = props => {
   const view = useRef();
   const [cellStart, setCellStart] = useState(0);
   const [top, setTop] = useState(0);
+  const [scrollTop, setScrollTop] = useState(0);
   const [height, setHeight] = useState(0);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
@@ -31,13 +31,14 @@ const FCalendar = props => {
     key: i,
   })));
   const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>{
-    
     setTop(pageY);
     setHeight(height);
   });
   
   const inside = (x, y) => x >= top && y <= height +top;
-    
+  const handleScroll = e => {
+    setScrollTop(Number(e.nativeEvent.contentOffset.y));
+  }
 
   const getCell = findCell(rows, radius)
   const activateDays = (start, end) => days.map((day, index) => ({selected: index >=start && index<=end, key: index}))
@@ -46,35 +47,42 @@ const FCalendar = props => {
     onMoveShouldSetPanResponderCapture: ({nativeEvent: {pageX, pageY}}) => inside(pageX, pageY),
     onPanResponderGrant: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
       if(inside(pageX, pageY)) {
-        setCellStart(getCell(pageX.toFixed(0), pageY.toFixed(0) - top));
+        const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
+        setCellStart(getCell(pageX.toFixed(0), _top));
         setDays([...activateDays(cellStart, cellStart)])
       }
     },
-    onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
+    onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}} ,{moveX, moveY}) => {
       if(inside(pageX, pageY)) {
-        const cellEnd =  getCell(pageX.toFixed(0), pageY.toFixed(0) - top);
+        const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
+
+        const cellEnd =  getCell(pageX.toFixed(0), _top);
         const start = Math.min(cellStart, cellEnd);
         const end = Math.max(cellStart, cellEnd);
-        setDays([...activateDays(start, end)])
+        console.log(start, end, '777777777 --->',  _top);
+        setDays([...activateDays(start, end)]);
       }
     },
     onPanResponderTerminate: evt => {
       console.log('ACABAA!!!!');
     },
-    onPanResponderTerminationRequest: () => {
-      console.log('007777777777');
-    },
-    onPanResponderRelease: evt => true,
+    onPanResponderTerminationRequest: () => true,
   });
   
-  return (<View style={{
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignItems: 'flex-start',
-      backgroundColor: "blue",
-      height: 300,
-      width: '100%',
-      position: 'absolute',
+  return (<ScrollView
+    onScroll={handleScroll}
+      style={{
+        backgroundColor: 'lime', height: 300
+      }}>
+        <View style={{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        backgroundColor: "blue",
+        // height: 300,
+        top: 0,
+        width: '100%',
+      // position: 'absolute',
     }}
     onLayout={onPresent} 
       ref={view}
@@ -85,37 +93,12 @@ const FCalendar = props => {
       text={`${key+1}`}
       key={key}
       radius={radius} />)}
-  </View>);
+  </View></ScrollView>);
 }
 
 export default FCalendar;
 
 
-// type Props = {
-//   days: [],
-//   onSingleCellSelection: (cellIndex: number) => void,
-//   onMultiSelectionEnd: (selectionMode: string, selection: Array<number>) => void,
-//   renderCell: (cellItem: Object) => any,
-//   cellsPerRow: number,
-// };
-
-// type State = {
-//   multiSelectionMode: ?('select' | 'deselect'),
-//   initialSelectedCellIndex: ?number,
-//   currentSelection: Array<number>,
-//   cellLayout: {
-//     height: number,
-//     width: number,
-//   },
-//   calendarLayout: {
-//     height: number,
-//     width: number,
-//   },
-//   shouldScrollDown: boolean,
-//   shouldScrollUp: boolean,
-//   scrollOffset: number,
-//   maxScrollOffset: number,
-// };
 
 // export default class Calendar extends Component<Props, State> {
 //   panResponder;
