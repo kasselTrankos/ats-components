@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import Water from './Water';
 import Slider from './Slider';
