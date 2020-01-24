@@ -1,6 +1,6 @@
-import React, { Componnent } from 'react';
-import { View, TouchableHighlight } from 'react-native';
-import {Svg, Circle, Defs, Mask, Path, Rect, Use, Line, TextPath} from 'react-native-svg';
+import React  from 'react';
+import { View } from 'react-native';
+import {Svg, Circle, Defs, Mask, Rect, Use} from 'react-native-svg';
 
 
 const Water = props => {
@@ -11,7 +11,6 @@ const Water = props => {
     sizes = [1, 2, 3, 'Empty'],
     radius = 190
   } = props;
-  console.log(radius, '00000');
   return (
     <View style={{ width: radius * 2, height: radius * 2, top: 0,}}>
       <Svg  style={{flex: 1}}>

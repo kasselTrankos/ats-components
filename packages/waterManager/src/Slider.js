@@ -1,34 +1,7 @@
-import React, { Component, useState} from 'react'
-import { PanResponder, View, Dimensions,Text } from 'react-native'
+import React, { useState} from 'react'
+import { PanResponder, View,Text } from 'react-native'
 import Svg, { Path, Circle, G } from 'react-native-svg'
-
-
-
-
-
-const polarToCartesian = (angle, radius, btnRadius) => {
-  const hC = radius + btnRadius;
-  const a = (angle-90) * Math.PI / 180.0;
-
-  const x = hC + (radius * Math.cos(a));
-  const y = hC + (radius * Math.sin(a));
-  return {x, y};
-}
-
-const cartesianToPolar = (x,y, dialRadius, btnRadius) => {
-  let hC = dialRadius + btnRadius;
-
-  if (x === 0) {
-    return y > hC ? 0 : 180;
-  }
-  else if (y === 0) {
-    return x > hC ? 90 : 270;
-  }
-  else {
-    return (Math.round((Math.atan((y-hC)/(x-hC)))*180/Math.PI) +
-      (x>hC ? 90 : 270));
-  }
-};
+import {polarToCartesian, getAngleDegree, getRelativeValue} from './../lib/math';
 
 const FuncSlider = props => {
   const {
@@ -46,26 +19,21 @@ const FuncSlider = props => {
     value = 120,
     prefix= '\'\''
   } = props;
-  
-  const [angle, setAngle ] = useState(value > maxDial ? maxDial : value);
+  const [angle, setAngle ] = useState(Math.max(value, maxDial));
+  const getTextValue = getRelativeValue(maxDial);
+  const [textValue, setTextValue] = useState(getTextValue(angle));
+  const width = (radius + dialRadius) * 2;
   const panResponder = React.useMemo(() => PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onStartShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
-    onPanResponderMove: event => {
-      const {locationX = 0, locationY = 0} = event.nativeEvent;
-      const x = locationX.toFixed(2);
-      const y = locationY.toFixed(2);
-      const dx = x - (radius + dialRadius);
-      const dy = y - (radius + dialRadius);
-      let newAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
-      if  (newAngle < 0) newAngle = 360 + newAngle;
-      
-      setAngle(Math.round(newAngle));
+    onPanResponderMove: ({nativeEvent}) => {
+      const angle = getAngleDegree(nativeEvent, width / 2);
+      setAngle(Math.round(angle));
+      setTextValue(getTextValue(angle));
     }
   }), []);
-  const width = (radius + dialRadius) * 2;
   const startCoord = polarToCartesian(0, radius, dialRadius);
   const endCoord = polarToCartesian(angle, radius, dialRadius);
   return (<View>
@@ -104,7 +72,7 @@ const FuncSlider = props => {
             textAlignVertical:'center',
             lineHeight: dialRadius * 2,
             color: dialTextColor,
-          }}>{angle}{prefix}</Text>
+          }}>{textValue}{prefix}</Text>
         </View>
       </G>
     </Svg>
