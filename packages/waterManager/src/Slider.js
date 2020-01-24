@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import { PanResponder, View,Text } from 'react-native'
 import Svg, { Path, Circle, G } from 'react-native-svg'
-import {polarToCartesian, getAngleDegree, getRelativeValue} from './../lib/math';
+import {polarToCartesian, getAngleDegree, getRelativeValue, getRelativeDegree} from './../lib/math';
 
 const FuncSlider = props => {
   const {
@@ -19,7 +19,7 @@ const FuncSlider = props => {
     value = 120,
     prefix= '\'\''
   } = props;
-  const [angle, setAngle ] = useState(Math.max(value, maxDial));
+  const [angle, setAngle ] = useState(getRelativeDegree(maxDial)(Math.min(value, maxDial)));
   const getTextValue = getRelativeValue(maxDial);
   const [textValue, setTextValue] = useState(getTextValue(angle));
   const width = (radius + dialRadius) * 2;
