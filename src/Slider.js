@@ -19,10 +19,16 @@ const FuncSlider = props => {
     value = 120,
     prefix= '\'\''
   } = props;
-  const [angle, setAngle ] = useState(getRelativeDegree(maxDial)(Math.min(value, maxDial)));
-  const getTextValue = getRelativeValue(maxDial);
-  const [textValue, setTextValue] = useState(getTextValue(angle));
+  const getAngleDegree = getRelativeDegree(maxDial);
+  const [angle, setAngle ] = useState(getAngleDegree(Math.min(value, maxDial)));
+  const getValue = getRelativeValue(maxDial);
+  const [textValue, setTextValue] = useState(value);
   const width = (radius + dialRadius) * 2;
+  useEffect(()=> {
+    setAngle(getAngleDegree(Math.min(value, maxDial)));
+    setTextValue(value);
+
+  }, [value]);
   const panResponder = React.useMemo(() => PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onStartShouldSetPanResponderCapture: () => true,
@@ -31,8 +37,9 @@ const FuncSlider = props => {
     onPanResponderMove: ({nativeEvent}) => {
       const angle = getAngleDegree(nativeEvent, width / 2);
       setAngle(Math.round(angle));
-      setTextValue(getTextValue(angle));
-    }
+      setTextValue(getValue(angle));
+    },
+    onPanResponderRelease: ()=> onChange(getValue(angle))
   }), []);
   const startCoord = polarToCartesian(0, radius, dialRadius);
   const endCoord = polarToCartesian(angle, radius, dialRadius);
