@@ -14,7 +14,7 @@ export default function App(props) {
     fillColor = 'none',
     fontSize = 30,
     fontColor = '#87c0cd',
-    maxDial = 360,
+    maxDial = 90,
     minDial = 0,
     meterColor = '#333',
     onChange = (e)=> {}, 
@@ -23,7 +23,7 @@ export default function App(props) {
     sizes = [1, 2, 3, 'Empty'],
     strokeWidth = 0,
     strokeColor = '#d9eeec',
-    value = 120,
+    value = 40,
     volumen = 100,
     waterColor= '#eaf5ff',
   } = props;
