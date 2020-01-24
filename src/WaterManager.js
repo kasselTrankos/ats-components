@@ -7,6 +7,7 @@ import Slider from './Slider';
 
 const WaterManager  = props => {
   const {
+    disabled = false,
     dialWidth = 9,
     dialRadius = 20,
     dialColor = "#5BC0EB",
@@ -30,7 +31,8 @@ const WaterManager  = props => {
   } = props;
   const width = radius * 2;
   const height = radius * 2;
-  return <TouchableHighlight 
+  return <TouchableHighlight
+    disabled={disabled} 
     onPress={onPress}
     underlayColor="white"
     style={{
@@ -60,10 +62,10 @@ const WaterManager  = props => {
         <Text style={{
           position: 'absolute',
           fontSize, 
-          lineHeight: radius * 2 + dialRadius * 2,
-          textAlignVertical: 'center',
+          height: radius * 2 + dialRadius * 2,
+          // textAlignVertical: 'bottom',
           width: '100%', 
-          top: 0, 
+          top: radius * 2 - fontSize + strokeWidth, 
           textAlign: 'center', 
           color: fontColor,
           }}>{`${volumen}%`}</Text>
