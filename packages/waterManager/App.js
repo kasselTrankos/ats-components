@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import WaterManager from './src/WaterManager';
 
 
 export default function App(props) {
   const {
+    top =0,
+    left=  0,
     disabled = false,
     dialWidth = 1,
     dialRadius = 40,
@@ -29,7 +31,7 @@ export default function App(props) {
   } = props;
 
   return (
-    <View style={styles.container}>
+    <View style={{top, left, flex: 1, alignItems: 'center'}}>
       <WaterManager
       minDial={minDial}
       onChange={onChange}
@@ -55,13 +57,4 @@ export default function App(props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    top: 30,
-    left: 0,
-    flex: 1,
-    alignItems: 'center',
-  },
-});
 
