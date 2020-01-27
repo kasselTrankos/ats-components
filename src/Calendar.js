@@ -90,7 +90,7 @@ const Calendar = props => {
     setHeight(height);
   });
   
-  const inside = (x, y) => x >= top && y <= height +top;
+  const inside = (x, y) => y >= top && y <= height +top;
   const handleScroll = e => {
     setScrollTop(Number(e.nativeEvent.contentOffset.y));
   }
