@@ -107,7 +107,7 @@ const Calendar = props => {
       setCellStart(getCell(pageX.toFixed(0), _top));
       setDays([...activateDays(cellStart, cellStart)])
     },
-    onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
+    onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}}, {moveX, moveY}) => {
         const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
         const cellEnd =  getCell(pageX.toFixed(0), _top);
         const start = Math.min(cellStart, cellEnd);
