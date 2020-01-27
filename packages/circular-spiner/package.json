@@ -1,6 +1,6 @@
 {
   "name": "@ats-components/water-spiner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "CircleSpinner.js",
   "scripts": {
     "start": "expo start",
