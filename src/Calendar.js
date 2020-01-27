@@ -90,7 +90,6 @@ const Calendar = props => {
     setHeight(height);
   });
   
-  const inside = (x, y) => y >= top && y <= height +top;
   const handleScroll = e => {
     setScrollTop(Number(e.nativeEvent.contentOffset.y));
   }
@@ -101,7 +100,7 @@ const Calendar = props => {
   const getCell = findCell(rows, radius);
   const panResponde = PanResponder.create({
     // prevent children interactuact prevented.
-    onMoveShouldSetPanResponderCapture: ({nativeEvent: {pageX, pageY}}) => inside(pageX, pageY) && !dragging,
+    onMoveShouldSetPanResponderCapture: () => !dragging,
     onPanResponderGrant: ({nativeEvent: {pageX = 0, pageY = 0}}) => {
       const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
       setCellStart(getCell(pageX.toFixed(0), _top));
