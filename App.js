@@ -1,13 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Svg, {Circle} from 'react-native-svg';
-export default function App() {
+import { StyleSheet, View } from 'react-native';
+import Spiner from './src/spiner';
+export default function App(props) {
+  const {
+    dialWidth = 40,
+    timeIn = 2000,
+    timeOut = 700,
+    radius =180,
+    colors = ['#C004D9', '#505AFC', '#8527B7', '#F2BE22', '#90D948'],
+    opacity = 0.5,
+    backgroundColor = '#fff',
+  } = props;
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Svg height="100" width="100">
-        <Circle cx="50" cy="50" r="50" fill="pink" />
-      </Svg>
+      <Spiner 
+        dialWidth ={dialWidth}
+        timeIn={timeIn}
+        timeOut={timeOut}
+        radius={radius}
+        colors={colors}
+        opacity={opacity}
+        backgroundColor={backgroundColor} />
     </View>
   );
 }
