@@ -1,6 +1,6 @@
 {
   "name": "@ats-components/water-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "App.js",
   "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/waterManager#readme",
   "license": "ISC",
