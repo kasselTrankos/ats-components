@@ -1,7 +1,7 @@
 {
   "name": "@ats-components/water-spiner",
-  "version": "1.1.5",
-  "main": "App.js",
+  "version": "1.0.0",
+  "main": "CircleSpinner.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
