@@ -1,19 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// @flow
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
+import React, { Component } from "react";
+import { View } from 'react-native';
+import Calendar from "./src/Calendar.js";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const onDates = (dates)=> {};
+
+const App = props => <View style={{top: 40, flex: 1}}>
+    <Calendar
+      onDates={onDates}
+      inactiveColor="#f1f9f9"
+      colorDayText = "#192965"
+      passedDay = "#ebe6e6"
+      currentDay= "#9aceff" />
+  </View>
+
+export default App;
