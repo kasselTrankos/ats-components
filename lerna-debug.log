@@ -1,6 +1,5 @@
-44 warn complete Waiting for 1 child process to exit. CTRL-C to exit immediately.
-45 error Error: Command failed: git tag @ats-components/steps-irrigation@1.0.3 -m @ats-components/steps-irrigation@1.0.3
-45 error fatal: el tag '@ats-components/steps-irrigation@1.0.3' ya existe
-45 error
-45 error     at makeError (/home/vera/Documentos/react-componentes/node_modules/execa/index.js:174:9)
-45 error     at Promise.all.then.arr (/home/vera/Documentos/react-componentes/node_modules/execa/index.js:278:16)
+52 error Error: Command failed: git tag @ats-components/water-manager@1.0.2 -m @ats-components/water-manager@1.0.2
+52 error fatal: el tag '@ats-components/water-manager@1.0.2' ya existe
+52 error
+52 error     at makeError (/home/vera/.config/versions/node/v11.15.0/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
+52 error     at Promise.all.then.arr (/home/vera/.config/versions/node/v11.15.0/lib/node_modules/lerna/node_modules/execa/index.js:278:16)
