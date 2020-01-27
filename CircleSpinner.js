@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Spiner from './src/spiner';
-export default function App(props) {
+export default function CircleSpinner(props) {
   const {
     dialWidth = 40,
     timeIn = 2000,
