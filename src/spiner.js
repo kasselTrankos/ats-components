@@ -1,31 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import { View, Animated, Easing, Text} from 'react-native';
+import React from 'react';
+import { View, Animated} from 'react-native';
 import Svg, { Path} from 'react-native-svg';
+
+const compose = (...fns) => x => fns.reduceRight((v, f)=> f(v), x);
+const sin = value => Math.sin(value);
+const cos = value => Math.cos(value);
+const floor = value => Math.floor(value);
+const random = () => Math.random();
+const add = a => b => a + b;
+const product = a => b => a * b;
+const getRadians = angle => (angle-90) * Math.PI / 180.0;
+const rnd = value => compose(floor, product(random()))(value)
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-const polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
-  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
-
-  return {
-    x: centerX + (radius * Math.cos(angleInRadians)),
-    y: centerY + (radius * Math.sin(angleInRadians))
-  };
-}
-const rnd = arr => arr[Math.floor(Math.random()*arr.length)]
+const polarToCartesian = (x, y, radius, angleInDegrees) => ({
+  x: compose(add(x), product(radius), cos, getRadians)(angleInDegrees),
+  y: compose(add(y), product(radius), sin, getRadians)(angleInDegrees)
+});
 const describeArc = (x, y, radius, startAngle, endAngle) =>{
 
-  var start = polarToCartesian(x, y, radius, endAngle);
-  var end = polarToCartesian(x, y, radius, startAngle);
+  const start = polarToCartesian(x, y, radius, endAngle);
+  const end = polarToCartesian(x, y, radius, startAngle);
 
-  var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+  const largeArcFlag = endAngle - startAngle <= 180 ? 0 : 1;
 
-  var d = [
-      "M", start.x, start.y,
-      "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-  ].join(" ");
-
-  return d;
+  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
 }
 
 
@@ -42,53 +42,44 @@ const Spiner = props => {
   } = props;
   const spinerWheel = (color, index) => {
     const wheel  = new Animated.Value(0);
+    const sequences = [
+      Animated.delay(500 * index),
+      Animated.timing(
+        wheel,
+        {
+          toValue: 1,
+          duration: timeIn,
+          useNativeDriver: true
+        }
+      ),
+      Animated.timing(
+        wheel,
+        {
+          toValue: 0,
+          duration: timeOut,
+          useNativeDriver: true
+        }
+      ),
+    // Call on self when animation completes
+    ];
     const anim = () => {
-      Animated.sequence([
-        Animated.delay(500 * index),
-        Animated.timing(
-          wheel,
-          {
-            toValue: 1,
-            duration: timeIn,
-            useNativeDriver: true
-          }
-        ),
-        Animated.timing(
-          wheel,
-          {
-            toValue: 0,
-            duration: timeOut,
-            useNativeDriver: true
-          }
-        ),
-      // Call on self when animation completes
-      ]).start(anim);
+      Animated.sequence(sequences).start(anim);
     };
-    const dRange = [];
-    const iRange = [];
-    const strokeWidth = Math.floor(Math.random() * dialWidth);
-    const start = Math.floor(Math.random() * 360);
-    const steps = start + 360;
-    for (let i = start; i < steps; i++){
-     
-      dRange.push(describeArc(radius , radius, radius/2, start, 0 + i));
-      iRange.push((i - start)/(360 -1));
-    }
+    const strokeWidth = rnd(dialWidth);
+    const start = rnd(360);
+    const long = Array.from({length: 360}, (_, i) => i);
     const rotation = wheel.interpolate({
-      inputRange: iRange,
-      outputRange: dRange
+      inputRange: long.map(i => i /(360 -1)),
+      outputRange: long.map(i => describeArc(radius , radius, radius/2, start, i + start))
     });
-    return {jsx: 
-      <AnimatedPath 
+    anim();
+    return <AnimatedPath 
         key={index} 
         d={rotation}
         stroke={color} 
-        strokeWidth={strokeWidth} fill="none"/>, fn: anim};
+        strokeWidth={strokeWidth} fill="none"/>;
   }
-  const anims = colors.map(spinerWheel);
-  useEffect(() => {
-    anims.forEach(({fn}) => fn())
-  }, []);
+  
   return ( <View style={{
       flex:1,
       alignItems: 'center',
@@ -102,7 +93,7 @@ const Spiner = props => {
       <Svg
         width={radius * 2}
         height={radius *2}>
-          {anims.map(({jsx}) => jsx)}
+          {colors.map(spinerWheel)}
         </Svg>
       
     </View>

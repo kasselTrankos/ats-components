@@ -1,7 +1,7 @@
 {
   "name": "@ats-components/water-spiner",
   "version": "1.0.0",
-  "main": "node_modules/expo/CircleSpinner.js",
+  "main": "node_modules/expo/AppEntry.js",
   "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/circular-spiner#readme",
   "scripts": {
     "start": "expo start",
@@ -11,6 +11,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "daggy": "^1.4.0",
     "expo": "~36.0.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",

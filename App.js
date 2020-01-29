@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Spiner from './src/spiner';
+
 export default function CircleSpinner(props) {
   const {
     dialWidth = 40,
@@ -9,7 +10,7 @@ export default function CircleSpinner(props) {
     radius =180,
     colors = ['#C004D9', '#505AFC', '#8527B7', '#F2BE22', '#90D948'],
     opacity = 0.5,
-    backgroundColor = '#fff',
+    backgroundColor = '#333',
   } = props;
   return (
     <View style={styles.container}>
@@ -28,7 +29,6 @@ export default function CircleSpinner(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
