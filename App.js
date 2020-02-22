@@ -1,19 +1,20 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, KeyboardAvoidingViewBase } from 'react-native';
 import Irrigate from './src/irrigate';
+
 
 const test =[
   {"date":"2019-10-10 23:00","day":"2020-01-24","uuid":"96ddf180-eaa2-11e9-8f6a-c14573fa7201","duration":63,"hour":"23","minute":"10"},
-{"date":"2019-10-11 09:00","day":"2020-10-11","uuid":"96d4d100-e4d4-11e9-a2b9-0d61e5afca6a","duration":63,"hour":"09","minute":"30"},
-{"date":"2019-10-13 09:00","day":"2019-10-13","uuid":"bed1c910-e4d4-11e9-9d82-91befd3c4656","duration":63,"hour":"09","minute":"00"},
+{"date":"2019-10-11 09:00","day":"2020-10-11","uuid":"96d4d100-e4d4-11e9-a2b9-0d61e5afca6a","duration":63,"hour":"14","minute":"30"},
+{"date":"2019-10-13 09:00","day":"2020-11-21","uuid":"bed1c910-e4d4-11e9-9d82-91befd3c4656","duration":63,"hour":"09","minute":"00"},
+{"date":"2019-10-21 09:00","day":"2020-10-01","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
 {"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
+{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"22","minute":"00"},
+{"date":"2019-10-21 09:00","day":"2020-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"07","minute":"00"},
+{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"44"},
 {"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
-{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
-{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
-{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
-{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
-{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
-{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
+{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"01","minute":"00"},
+{"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"333"},
 {"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
 {"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
 {"date":"2019-10-21 09:00","day":"2019-10-21","uuid":"debee350-e751-11e9-9731-af8d8f83200b","duration":63,"hour":"09","minute":"00"},
@@ -24,14 +25,24 @@ const test =[
 
 export default function App(props) {
   const {
-    irrigations = test 
+    irrigations = test,
+    height = 200,
+    top = 80,
   } = props;
   return (
-    <ScrollView style={{backgroundColor: 'lime', height: 500}}>
-    <View style={styles.container}>
-      {irrigations.map((args, key) => <Irrigate key={key} {...args} />)}
+    // <ScrollView 
+    //   style={{
+    //     top,
+    //     position: 'absolute',
+    //     width: '100%',
+    //     height}}>
+    <View style={{
+        flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',}}>
+      {irrigations.map((args, key) => <Irrigate key={args.uuid} {...args} />)}
     </View>
-    </ScrollView>
+    // </ScrollView>
   );
 }
 
