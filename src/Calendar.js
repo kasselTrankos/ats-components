@@ -4,6 +4,9 @@ import React, { useState, useRef } from 'react';
   import { View, Dimensions, PanResponder, ScrollView, Vibration } from 'react-native';
 import Day from './Day';
 
+const min = orign => current => Math.min(orign, current);
+const max = orign => current => Math.max(orign, current);
+
 
 const findCell = (rows, radius) => (x, y)=> {
   const right = Math.floor(x / radius);
@@ -11,25 +14,24 @@ const findCell = (rows, radius) => (x, y)=> {
   return right + rows * bottom;;
 };
 const lt = (dateA = new Date()) => dateB => +dateA > +dateB;
-const getDay = daysInMonth => {
-  let month = 0;
-  const currentDay = new Date().getDate();
-  const currentMonth = new Date().getMonth();
+const getDay = date => daysInMonth => {
+  const currentDay = date.getDate();
+  const currentMonth = date.getMonth();
+  
+  let month = currentMonth;
+  let day = currentDay - 1;
   const isPassedDate = lt();
   return value => {
-    const lessDays = daysInMonth.reduce((acc, current, index)=> {
-      if(index < month) {
-        acc+=current;
-      }
-      return acc;
-    } , 0);
-    const day = value - lessDays;
-    const current = new Date(new Date().getFullYear(), month, day);
-    if(day===daysInMonth[month]) month ++;
-
+    day++;
+    
+    if(day===daysInMonth[month]) {
+      month ++;
+      day = 1;
+    }
+    const current = new Date(date.getFullYear(), month, day);
     return {
       month: month,
-      day: day,
+      day,
       isToday: currentMonth === month && day === currentDay,
       isPassed: isPassedDate(current)
     }; 
@@ -45,6 +47,7 @@ const getDaysMonth = () => {
 const Calendar = props => {
   const {
     amount = 200,
+    startDate = new Date(),
     rows = 7,
     colorDayText = '#192965',
     inactiveColor = '#fff',
@@ -53,9 +56,10 @@ const Calendar = props => {
     passedDay = '#0f4c75',
     currentDay= '#edf7fa',
     onDates=()=>{},
+    calHeight = 300,
     
   } = props;
-  const getDate = getDay(getDaysMonth())
+  const getDate = getDay(startDate)(getDaysMonth())
   const view = useRef();
   const [cellStart, setCellStart] = useState(0);
   const [height, setHeight] = useState(300);
@@ -64,8 +68,10 @@ const Calendar = props => {
   const [dragging, setDragging] = useState(true);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
+  const getEnd = min(cellStart);
+  const getStart = max(cellStart);
   const [days, setDays] = useState( Array(amount).fill().map((v, index) => {
-    const {day, isToday, isPassed} = getDate(index + 1);
+    const {day, isToday, isPassed} = getDate(index);
     return {
       selected: false, 
       key: index,
@@ -107,11 +113,11 @@ const Calendar = props => {
       setDays([...activateDays(cellStart, cellStart)])
     },
     onPanResponderMove: ({nativeEvent: {pageX = 0, pageY = 0}}, {moveX, moveY}) => {
-        const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
-        const cellEnd =  getCell(pageX.toFixed(0), _top);
-        const start = Math.min(cellStart, cellEnd);
-        const end = Math.max(cellStart, cellEnd);
-        setDays([...activateDays(start, end)]);
+      const _top = Number(scrollTop.toFixed(0)) + Number(pageY.toFixed(0)) - Number(top);
+      const cellEnd =  getCell(pageX.toFixed(0), _top);
+      const start = getStart(cellEnd);
+      const end = getEnd(cellEnd);
+      setDays([...activateDays(start, end)]);
     },
     onPanResponderRelease: () => {
       setDragging(true);
@@ -124,7 +130,7 @@ const Calendar = props => {
     onScroll={handleScroll}
     style={{
       position: 'absolute',
-      height: 300,
+      height: calHeight,
       width: '100%',
     }}>
     <View style={{
