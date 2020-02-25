@@ -11,7 +11,7 @@ const App = props =>{
     top = 40,
     left = 0,
     height = 150,
-    days = 210,
+    days = 40,
     startDate = new Date(),
     width = '100%',
     activeColor = '#2988B1',
@@ -20,7 +20,7 @@ const App = props =>{
     vibrationDuration= 100,
     passedDay ='#0f4c75',
     currentDay ='#edf7fa',
-    onDates= (e) => {}
+    onDates = (e) => {console.log(e, 'app')}
   } = props;
   return <View style={{
     flex: 1, 

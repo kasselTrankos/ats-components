@@ -3,46 +3,31 @@
 import React, { useState, useRef } from 'react';
   import { View, Dimensions, PanResponder, ScrollView, Vibration } from 'react-native';
 import Day from './Day';
-
-const min = orign => current => Math.min(orign, current);
-const max = orign => current => Math.max(orign, current);
-
+import datetime from './date';
+import {getMonday, getDate, getMonth, setMidnight, min, max} from './utils'
 
 const findCell = (rows, radius) => (x, y)=> {
   const right = Math.floor(x / radius);
   const bottom = Math.floor(y / radius);
   return right + rows * bottom;;
 };
-const lt = (dateA = new Date()) => dateB => +dateA > +dateB;
-const getDay = date => daysInMonth => {
-  const currentDay = date.getDate();
-  const currentMonth = date.getMonth();
-  
-  let month = currentMonth;
-  let day = currentDay - 1;
-  const isPassedDate = lt();
+const getDay = date => {
+  const D = new datetime(date);
+  const today = new datetime(new Date());
+  const monday = D.concat(D.map(getMonday));
   return value => {
-    day++;
-    
-    if(day===daysInMonth[month]) {
-      month ++;
-      day = 1;
-    }
-    const current = new Date(date.getFullYear(), month, day);
+    const dayAdd = datetime.from(new Date(value * 24 * 60 * 60 * 1000));
+    const currentDay = monday.concat(dayAdd);
+    const isToday = currentDay.map(setMidnight).equals(today.map(setMidnight));
     return {
-      month: month,
-      day,
-      isToday: currentMonth === month && day === currentDay,
-      isPassed: isPassedDate(current)
+      month: currentDay.map(getMonth).value,
+      day: currentDay.map(getDate).value,
+      date: currentDay.value,
+      isToday,
+      isPassed: !isToday && currentDay.map(setMidnight).lte(today.map(setMidnight))
     }; 
   }
 }
-
-const getDaysMonth = () => {
-  const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
-  return Array.from({length: 12}).map((el, index) => daysInMonth(index+1, new Date().getFullYear()))
-};
-
 
 const Calendar = props => {
   const {
@@ -59,7 +44,6 @@ const Calendar = props => {
     calHeight = 300,
     
   } = props;
-  const getDate = getDay(startDate)(getDaysMonth())
   const view = useRef();
   const [cellStart, setCellStart] = useState(0);
   const [height, setHeight] = useState(300);
@@ -68,18 +52,18 @@ const Calendar = props => {
   const [dragging, setDragging] = useState(true);
   const {width} = Dimensions.get('window');
   const radius = Math.round((width) / rows);
-  const getEnd = min(cellStart);
-  const getStart = max(cellStart);
+  const getEnd = max(cellStart);
+  const getStart = min(cellStart);
   const [days, setDays] = useState( Array(amount).fill().map((v, index) => {
-    const {day, isToday, isPassed} = getDate(index);
+    const {day, isToday, isPassed, date} = getDay(startDate)(index);
     return {
       selected: false, 
       key: index,
-      day, isPassed, isToday
+      day, isPassed, isToday, date
     };
   }));
   const onDatesSelected = () => {
-    const selected = days.filter(({selected}) => selected);
+    const selected = days.filter(({selected}) => selected).map(x=> x.date);
     onDates([...selected]);
   };
   const onPress = key => {
@@ -87,9 +71,9 @@ const Calendar = props => {
     setDays([...days]);
     onDatesSelected();
   }
-  const activateDays = (start, end) => days.map(({selected, key, day, isPassed, isToday}) => ({
+  const activateDays = (start, end) => days.map(({selected, key, day, isPassed, isToday, date}) => ({
     selected: key >=start && key<=end, 
-    key, day, isPassed, isToday
+    key, day, isPassed, isToday, date
   }))
   const onPresent = evt => view.current.measure((x, y, width, height, pageX, pageY) =>{
     setTop(pageY);
@@ -121,6 +105,7 @@ const Calendar = props => {
     },
     onPanResponderRelease: () => {
       setDragging(true);
+      console.log('0 ahora')
       onDatesSelected();
     },
     onPanResponderTerminationRequest: () => true,
@@ -144,7 +129,7 @@ const Calendar = props => {
     ref={view}
     onLayout={onPresent}
     {...panResponde.panHandlers}>
-    {days.map(({selected, key, day, isToday, isPassed}, index)=> <Day 
+    {days.map(({selected, key, day, isToday, isPassed, date}, index)=> <Day 
       onLongPress={handleMultiple}
       onPress={onPress}
       selected={selected}
