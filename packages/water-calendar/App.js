@@ -8,10 +8,11 @@ import Calendar from "./src/Calendar.js";
 const App = props =>{ 
   const {
     rows = 7,
-    top = 100,
+    top = 40,
     left = 0,
-    height = 340,
-    amount = 210,
+    height = 150,
+    days = 40,
+    startDate = new Date(),
     width = '100%',
     activeColor = '#2988B1',
     colorDayText = '#192965',
@@ -19,7 +20,7 @@ const App = props =>{
     vibrationDuration= 100,
     passedDay ='#0f4c75',
     currentDay ='#edf7fa',
-    onDates= (e) => {}
+    onDates = (e) => {console.log(e, 'app')}
   } = props;
   return <View style={{
     flex: 1, 
@@ -29,13 +30,15 @@ const App = props =>{
     <Calendar
       rows={rows}
       onDates={onDates}
-      amount = {amount}
+      amount = {days}
+      startDate = {startDate}
       colorDayText = {colorDayText}
       inactiveColor = {inactiveColor}
       activeColor = {activeColor}
       vibrationDuration = {vibrationDuration}
       passedDay = {passedDay}
-      currentDay= {currentDay} />
+      currentDay= {currentDay}
+      calHeight = {height} />
   </View>}
 
 export default App;
