@@ -2,18 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Clock from './src/clock';
 
-const HOURS_24 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+
+const addZero = (_, x) => x <= 9 ? `0${x}` : x;
 
 const App = props => {
   const {
     style = {backgroundColor: '#E3E3E3', borderRadius: 10},
-    fontSize = 40,
-    height = 70,
-    width = 70,
+    fontSize = 32,
+    height = 60,
+    width = 60,
     marginRight = 4,
-    hours = HOURS_24.map(x => x<=9 ? `0${x}` : x),
-    minutes = Array.from({length: 61}, (_, x) => x<=9 ? `0${x}` : x),
-    seconds = Array.from({length: 61}, (_, x) => x<=9 ? `0${x}` : x),
+    hours = Array.from({length: 24}, addZero),
+    minutes = Array.from({length: 61}, addZero),
+    seconds = Array.from({length: 61}, addZero),
     color =  '#264E70',
     fontWeight = 'bold',
     onChange = (e) => console.log('hh', e)
