@@ -10,7 +10,7 @@ const App = props => {
     fontSize = 40,
     height = 70,
     width = 70,
-    marginRight = 10,
+    marginRight = 4,
     hours = HOURS_24.map(x => x<=9 ? `0${x}` : x),
     minutes = Array.from({length: 61}, (_, x) => x<=9 ? `0${x}` : x),
     seconds = Array.from({length: 61}, (_, x) => x<=9 ? `0${x}` : x),
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
   container: {
     top: 40,
     width: 300,
-    flex:1,
     
     backgroundColor: '#ff0099',
   },

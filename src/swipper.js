@@ -38,7 +38,7 @@ const Swipper = props => {
         ...SPRING_CONFIG,
         toValue: {x: 0, y: position * height}
       }).start();
-      onChange(value[Math.abs(position)])
+      onChange(values[Math.abs(position)])
     },
   }));
   return (<ScrollView
