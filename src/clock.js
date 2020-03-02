@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text} from 'react-native';
 import Swipper from './swipper';
 
 const HOURS_24 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
@@ -13,7 +13,8 @@ const defaultProps = {
   onChange: (e) => {}
 };
 const Clock = (props = defaultProps) => {
-  const {onChange, minutes, seconds, hours, width, height, marginRight} = props;
+  const {onChange, fontSize, minutes, color,
+    seconds, hours, width, height, marginRight} = props;
   let time = {hour: 0, minute: 0, second: 0};
   const setHour = e => {
     time.hour = e;
@@ -33,10 +34,14 @@ const Clock = (props = defaultProps) => {
           <Swipper
             {...props} values={hours} onChange={setHour}/>
         </View>
+        <Text style={{fontSize, textAlign:'center', 
+          width: 20, lineHeight: height, color}}>:</Text>
         <View style={{width, height, marginRight}} >
           <Swipper
             {...props} values={minutes} onChange={setMinutes} />
         </View>
+        <Text style={{fontSize, textAlign:'center',
+          width: 20, lineHeight: height, color}}>:</Text>
         <View style={{width, height}} >
           <Swipper
             {...props} values={seconds} onChange={setSeconds} />

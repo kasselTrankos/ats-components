@@ -1,17 +1,17 @@
 import React from 'react';
-import { View, ScrollView, Text, Animated, PanResponder } from 'react-native';
+import { ScrollView, Text, Animated, PanResponder } from 'react-native';
 
 const HOURS_24 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 const Swipper = props => {
   const {
-    style = {backgroundColor: 'blue', width: 80, height: 80},
+    style = {backgroundColor: 'red', width: 80, height: 80},
     height = 80,
     width = 80,
     values = HOURS_24,
     color = '#fff',
     fontSize = 24,
     fontWeight = 'bold',
-    onChange,
+    onChange= e => {},
     left = 0
   } = props;
   const limit = -1 * (values.length -1);
