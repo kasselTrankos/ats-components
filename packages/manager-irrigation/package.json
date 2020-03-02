@@ -1,5 +1,6 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "@ats-components/manager-irrigation",
+  "main": "App.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -18,5 +19,7 @@
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0"
   },
-  "private": true
+  "publishConfig": {
+    "access": "public"
+  }
 }
