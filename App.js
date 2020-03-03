@@ -22,20 +22,20 @@ const App = props => {
     value = {hour: '20', minute: '30', second: '00', duration: '15'},
     onChange = (e) => console.log('on change', e),
     onSave = e => console.log('on save', e),
-    onSeconds = e => console.log('on seconds', e),
+    onDuration = e => console.log('on seconds', e),
   } = props;
   let time = Object.assign({}, {hour: value.hour, minute: value.minute, second: value.second});
-  let second = value.duration || '00';
+  let duration = value.duration || '00';
   const save = e => {
-    onSave({time, second});
+    onSave({time, duration});
   }
   const onTime = e => {
     time = e;
     onChange(e);
   }
-  const onSecond = e => {
-    second = e;
-    onSeconds(e);
+  const onSelDuration = e => {
+    duration = e;
+    onDuration(e);
   }
   return (
     <View style={styles.container}>
@@ -62,7 +62,7 @@ const App = props => {
             width={width}
             fontSize={fontSize}
             color={color}
-            onChange = {onSecond}
+            onChange = {onSelDuration}
             value={value.duration}
             values={Array.from({length: 24}, addZero)} />
         </View>
