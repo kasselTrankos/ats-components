@@ -4,8 +4,7 @@ import Swipper from './src/swipper';
 import Clock from './src/clock';
 
 
-const addZero = (_, x) => x <= 9 ? `0${x}` : x;
-const addSecondSymbol = x => `${x}'`
+const addZero = (_, x) => x <= 9 ? `0${x}` : String(x);
 
 const App = props => {
   let time = {};
@@ -21,6 +20,7 @@ const App = props => {
     seconds = Array.from({length: 61}, addZero),
     color =  '#264E70',
     fontWeight = 'bold',
+    value = {hour: '20', minute: '30', second: '00', duration: '15'},
     onChange = (e) => console.log('on change', e),
     onSave = e => console.log('on save', e),
     onSeconds = e => console.log('on seconds', e),
@@ -52,6 +52,7 @@ const App = props => {
           minutes={minutes}
           marginRight={marginRight}
           onChange={onTime}
+          value={{ hour: value.hour, minute: value.minute, second: value.second }}
         />
         <View style={{ width, height, marginLeft: '5%', height: '100%' }}>
           <Swipper
@@ -61,14 +62,15 @@ const App = props => {
             fontSize={fontSize}
             color={color}
             onChange = {onSecond}
-            values={Array.from({length: 24}, addZero).map(addSecondSymbol)} />
+            value={value.duration}
+            values={Array.from({length: 24}, addZero)} />
         </View>
       </View>
-      <View style={{backgroundColor: 'red', marginTop: 20}}>
-      <Button
-        style={{marginTop: 40, width: '100%'}}
-        title="Guardar 1"
-        onPress={save}/>
+      <View style={{marginTop: 20}}>
+        <Button
+          style={{marginTop: 40, width: '100%'}}
+          title="Guardar 1"
+          onPress={save}/>
       </View>
     </View>
   );

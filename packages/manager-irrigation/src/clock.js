@@ -10,10 +10,11 @@ const defaultProps = {
   hours: HOURS_24,
   color: '#fff',
   fontSize: 24,
+  value: {hour: '20', minute: '30', second: '00'},
   onChange: (e) => {}
 };
 const Clock = (props = defaultProps) => {
-  const {onChange, fontSize, minutes, color,
+  const {onChange, fontSize, minutes, color, value,
     seconds, hours, width, height, marginRight} = props;
   let time = {hour: 0, minute: 0, second: 0};
   const setHour = e => {
@@ -32,19 +33,19 @@ const Clock = (props = defaultProps) => {
     <View style={{flexDirection: 'row'}}>
         <View style={{width, height, marginRight,}} >
           <Swipper
-            {...props} values={hours} onChange={setHour}/>
+            {...props} values={hours} onChange={setHour} value={value.hour}/>
         </View>
         <Text style={{fontSize, textAlign:'center', 
           width: 20, lineHeight: height, color}}>:</Text>
         <View style={{width, height, marginRight}} >
           <Swipper
-            {...props} values={minutes} onChange={setMinutes} />
+            {...props} values={minutes} onChange={setMinutes} value={value.minute} />
         </View>
         <Text style={{fontSize, textAlign:'center',
           width: 20, lineHeight: height, color}}>:</Text>
         <View style={{width, height}} >
           <Swipper
-            {...props} values={seconds} onChange={setSeconds} />
+            {...props} values={seconds} onChange={setSeconds} value={value.second}/>
         </View>
       </View>
   </View>)
