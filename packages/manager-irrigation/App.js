@@ -7,8 +7,7 @@ import Clock from './src/clock';
 const addZero = (_, x) => x <= 9 ? `0${x}` : String(x);
 
 const App = props => {
-  let time = {};
-  let second = 0;
+  
   const {
     style = {backgroundColor: '#E3E3E3', borderRadius: 10, width: '100%'},
     fontSize = 32,
@@ -25,6 +24,8 @@ const App = props => {
     onSave = e => console.log('on save', e),
     onSeconds = e => console.log('on seconds', e),
   } = props;
+  let time = Object.assign({}, {hour: value.hour, minute: value.minute, second: value.second});
+  let second = value.second || 0;
   const save = e => {
     onSave({time, second});
   }
