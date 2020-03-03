@@ -1,6 +1,6 @@
 {
   "name": "@ats-components/manager-irrigation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "App.js",
   "scripts": {
     "start": "expo start",
