@@ -25,7 +25,7 @@ const App = props => {
     onSeconds = e => console.log('on seconds', e),
   } = props;
   let time = Object.assign({}, {hour: value.hour, minute: value.minute, second: value.second});
-  let second = value.duration || 0;
+  let second = value.duration || '00';
   const save = e => {
     onSave({time, second});
   }
