@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, Text, Animated, PanResponder } from 'react-native';
 
 const HOURS_24 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
@@ -19,14 +19,14 @@ const Swipper = props => {
   const pan = new Animated.ValueXY();
   const pos = values.indexOf(String(value));
   let position = pos >= 0? pos * -1 : 0;
-  Animated.spring(pan, {
-    ...SPRING_CONFIG,
-    toValue: {x: 0, y: position * height}
-  }).start();
-  const limit = -1 * (values.length -1);
   const SPRING_CONFIG = {tension: 2, friction: 3}; //Soft spring
-  
-  
+  useEffect(()=> {
+    Animated.spring(pan, {
+      ...SPRING_CONFIG,
+      toValue: {x: 0, y: position * height}
+    }).start();
+  }, []);
+  const limit = -1 * (values.length -1);
   const scrollEnabled = false;
   let dy = 0;
   const panResponder = React.useMemo(() => PanResponder.create({
@@ -55,7 +55,7 @@ const Swipper = props => {
       {...panResponder.panHandlers}>
       <Animated.View 
         style={{transform: pan.getTranslateTransform(), 
-          width, height}}>
+          width, height, y: position * height}}>
         {values.map(el =><Text 
           style={{fontSize, color,  width, lineHeight: height, fontWeight, textAlign: 'center'}}
           key={el}>{el}</Text>)}
