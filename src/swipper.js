@@ -18,9 +18,10 @@ const Swipper = props => {
   } = props;
   const pan = new Animated.ValueXY();
   const pos = values.indexOf(String(value));
-  let position = pos >= 0? pos * -1 : 0;
   const SPRING_CONFIG = {tension: 2, friction: 3}; //Soft spring
+  let position;
   useEffect(()=> {
+    position = pos >= 0? pos * -1 : 0;
     Animated.spring(pan, {
       ...SPRING_CONFIG,
       toValue: {x: 0, y: position * height}
