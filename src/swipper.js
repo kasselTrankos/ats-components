@@ -14,14 +14,14 @@ const Swipper = props => {
     fontWeight = 'bold',
     onChange= e => {},
     value = 0,
-    left = 0
   } = props;
-  const pan = new Animated.ValueXY();
+  const [pan] = useState(new Animated.ValueXY());
   const pos = values.indexOf(String(value));
-  const SPRING_CONFIG = {tension: 2, friction: 3}; //Soft spring
-  let position;
+  const SPRING_CONFIG = {tension: 8, friction: 4, useNativeDriver: true}; //Soft spring
+  let position = pos >= 0? pos * -1 : 0;
+  
   useEffect(()=> {
-    position = pos >= 0? pos * -1 : 0;
+    
     Animated.spring(pan, {
       ...SPRING_CONFIG,
       toValue: {x: 0, y: position * height}
@@ -47,7 +47,7 @@ const Swipper = props => {
         ...SPRING_CONFIG,
         toValue: {x: 0, y: position * height}
       }).start();
-      onChange(values[Math.abs(position)])
+      onChange(values[Math.abs(position)]);
     },
   }));
   return (<ScrollView

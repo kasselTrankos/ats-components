@@ -24,18 +24,19 @@ const App = props => {
     onSave = e => console.log('on save', e),
     onDuration = e => console.log('on seconds', e),
   } = props;
-  let time = Object.assign({}, {hour: value.hour, minute: value.minute, second: value.second});
-  let duration = value.duration || '00';
+  const [time, setTime] = useState({hour: value.hour, minute: value.minute, second: value.second});
+  const [duration, setDuration] = useState(value.duration);
   const save = e => {
-    onSave({time, duration});
+    onSave({...time, duration});
   }
   const onTime = e => {
-    time = e;
-    onChange(e);
+    setTime(e);
+    onChange({...time, duration});
   }
   const onSelDuration = e => {
-    duration = e;
-    onDuration(e);
+    setDuration(e);
+    onChange({...time, duration});
+    onDuration(duration);
   }
   return (
     <View style={styles.container}>
@@ -53,7 +54,7 @@ const App = props => {
           minutes={minutes}
           marginRight={marginRight}
           onChange={onTime}
-          value={{ hour: value.hour, minute: value.minute, second: value.second }}
+          value={{ ...time }}
         />
         <View style={{ width, height, marginLeft: '5%', height: '100%' }}>
           <Swipper
@@ -63,7 +64,7 @@ const App = props => {
             fontSize={fontSize}
             color={color}
             onChange = {onSelDuration}
-            value={value.duration}
+            value={duration}
             values={Array.from({length: 24}, addZero)} />
         </View>
       </View>
