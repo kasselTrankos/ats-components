@@ -22,7 +22,7 @@ const App = props => {
     value = { hour: '20', minute: '30', second: '00', duration: '15' },
     onChange = (e) => console.log('on change', e),
     onSave = e => console.log('on save', e),
-    onDuration = e => console.log('on seconds', e),
+    onChangeDuration = e => console.log('on seconds', e),
     buttonText = 'Guardar',
     buttonColor = '#841584',
   } = props;
@@ -33,12 +33,12 @@ const App = props => {
   }
   const onTime = e => {
     setTime(e);
-    onChange({...time, duration});
+    onChange({...e, duration});
   }
   const onSelDuration = e => {
     setDuration(e);
-    onChange({...time, duration});
-    onDuration(duration);
+    onChange({...time, duration: e});
+    onChangeDuration(duration);
   }
   return (
     <View style={styles.container}>
