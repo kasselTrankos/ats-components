@@ -9,7 +9,7 @@ const addZero = (_, x) => x <= 9 ? `0${x}` : String(x);
 const App = props => {
   
   const {
-    style = {backgroundColor: '#E3E3E3', borderRadius: 10, width: '100%'},
+    style = { backgroundColor: '#E3E3E3', borderRadius: 10, width: '100%' },
     fontSize = 32,
     height = 60,
     width = 60,
@@ -19,10 +19,12 @@ const App = props => {
     seconds = Array.from({length: 61}, addZero),
     color =  '#264E70',
     fontWeight = 'bold',
-    value = {hour: '20', minute: '30', second: '00', duration: '15'},
+    value = { hour: '20', minute: '30', second: '00', duration: '15' },
     onChange = (e) => console.log('on change', e),
     onSave = e => console.log('on save', e),
     onDuration = e => console.log('on seconds', e),
+    buttonText = 'Guardar',
+    buttonColor = '#841584',
   } = props;
   const [time, setTime] = useState({hour: value.hour, minute: value.minute, second: value.second});
   const [duration, setDuration] = useState(value.duration);
@@ -71,7 +73,8 @@ const App = props => {
       <View style={{marginTop: 20}}>
         <Button
           style={{marginTop: 40, width: '100%'}}
-          title="Guardar 1"
+          color={buttonColor}
+          title={buttonText}
           onPress={save}/>
       </View>
     </View>
