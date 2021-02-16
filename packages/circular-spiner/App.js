@@ -1,8 +1,9 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Spiner from './src/spiner';
+import { StyleSheet, Text, View } from 'react-native';
+import Spiner from './spiner'
 
-export default function CircleSpinner(props) {
+export default function App(props) {
   const {
     dialWidth = 40,
     timeIn = 2000,
@@ -13,7 +14,7 @@ export default function CircleSpinner(props) {
     backgroundColor = '#333',
   } = props;
   return (
-    <View>
+    <View style={styles.container}>
       <Spiner 
         dialWidth ={dialWidth}
         timeIn={timeIn}
@@ -29,6 +30,7 @@ export default function CircleSpinner(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
