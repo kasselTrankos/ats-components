@@ -1,8 +1,12 @@
-48 error Error: Command failed: git add -- packages/circular-spiner/package.json packages/circular-spiner/package-lock.json
-48 error Las siguientes rutas son ignoradas por uno de tus archivos .gitignore:
-48 error packages/circular-spiner/package-lock.json
-48 error Usa -f si realmente quieres agregarlos.
-48 error
-48 error     at makeError (/home/vera/ats-components/node_modules/execa/index.js:174:9)
-48 error     at /home/vera/ats-components/node_modules/execa/index.js:278:16
-48 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+67 error Error: Command failed: git add -- packages/barCalendar/package.json packages/barCalendar/package-lock.json packages/pagination/package.json packages/pagination/package-lock.json packages/stepsIrrigation/package.json packages/stepsIrrigation/package-lock.json packages/circular-spiner/package.json packages/circular-spiner/package-lock.json packages/downCounter/package.json packages/waterIndicator/package.json packages/waterIndicator/package-lock.json
+67 error Las siguientes rutas son ignoradas por uno de tus archivos .gitignore:
+67 error packages/barCalendar/package-lock.json
+67 error packages/circular-spiner/package-lock.json
+67 error packages/pagination/package-lock.json
+67 error packages/stepsIrrigation/package-lock.json
+67 error packages/waterIndicator/package-lock.json
+67 error Usa -f si realmente quieres agregarlos.
+67 error
+67 error     at makeError (/home/vera/ats-components/node_modules/execa/index.js:174:9)
+67 error     at /home/vera/ats-components/node_modules/execa/index.js:278:16
+67 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)

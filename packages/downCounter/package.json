@@ -1,6 +1,6 @@
 {
   "name": "downcounter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "> TODO: description",
   "author": "kasselTrankos <alvaro.touzon@gmail.com>",
   "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/downCounter#readme",
@@ -37,7 +37,7 @@
     "react-test-renderer": "^16.10.2"
   },
   "dependencies": {
-    "@ats-components/steps-irrigation": "^1.1.0",
+    "@ats-components/steps-irrigation": "^1.1.1",
     "native-base": "^2.13.8",
     "react": "^16.10.2",
     "react-native": "^0.61.2",

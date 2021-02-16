@@ -1,7 +1,7 @@
 {
   "name": "@ats-components/circiular-spinner",
   "main": "index.js",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
