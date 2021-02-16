@@ -7,5 +7,5 @@
 ```
 const circularSpinner = require('circular-spinner');
 
-// TODO: DEMONSTRATE API
+Personal circular spinner
 ```
