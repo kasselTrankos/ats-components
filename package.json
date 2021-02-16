@@ -2,6 +2,18 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "@babel/core": "~7.9.0",
+    "babel-jest": "~25.2.6",
+    "jest": "~25.2.6",
+    "lerna": "^3.22.1",
+    "react-test-renderer": "~16.13.1"
+  },
+  "command": {
+    "bootstrap": {
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  },
+  "dependencies": {
+    "@ats-components/circular-spiner": "file:packages/circular-spinner"
   }
 }

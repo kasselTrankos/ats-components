@@ -1,0 +1,8 @@
+32 error Error: Command failed: git add -- packages/circular-spinner/package.json packages/circular-spinner/package-lock.json lerna.json
+32 error Las siguientes rutas son ignoradas por uno de tus archivos .gitignore:
+32 error packages/circular-spinner/package-lock.json
+32 error Usa -f si realmente quieres agregarlos.
+32 error
+32 error     at makeError (/home/vera/.npm/_npx/41045/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
+32 error     at /home/vera/.npm/_npx/41045/lib/node_modules/lerna/node_modules/execa/index.js:278:16
+32 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)
