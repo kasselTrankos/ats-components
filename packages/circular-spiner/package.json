@@ -1,7 +1,7 @@
 {
   "name": "@ats-components/circiular-spinner",
   "main": "index.js",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -15,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  
   "dependencies": {
     "expo": "~40.0.0",
     "expo-splash-screen": "~0.8.0",
