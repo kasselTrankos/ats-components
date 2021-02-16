@@ -1,5 +1,8 @@
-52 error Error: Command failed: git tag @ats-components/water-manager@1.0.2 -m @ats-components/water-manager@1.0.2
-52 error fatal: el tag '@ats-components/water-manager@1.0.2' ya existe
-52 error
-52 error     at makeError (/home/vera/.config/versions/node/v11.15.0/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
-52 error     at Promise.all.then.arr (/home/vera/.config/versions/node/v11.15.0/lib/node_modules/lerna/node_modules/execa/index.js:278:16)
+48 error Error: Command failed: git add -- packages/circular-spiner/package.json packages/circular-spiner/package-lock.json
+48 error Las siguientes rutas son ignoradas por uno de tus archivos .gitignore:
+48 error packages/circular-spiner/package-lock.json
+48 error Usa -f si realmente quieres agregarlos.
+48 error
+48 error     at makeError (/home/vera/ats-components/node_modules/execa/index.js:174:9)
+48 error     at /home/vera/ats-components/node_modules/execa/index.js:278:16
+48 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)
