@@ -86,9 +86,14 @@ const Spiner = props => {
       justifyContent: 'center',
     }}>
       <View
-        style={{position: 'absolute', top:0, left: 0, backgroundColor, opacity}}
-        width="100%"
-        height="100%"
+        style={{position: 'absolute',
+        alignSelf: 'center',
+        justifyContent:"flex-start",
+        backgroundColor, 
+        opacity,
+        top: 0,
+        width: '100%',
+        height: '100%',}}
       ></View>
       <Svg
         width={radius * 2}

@@ -1,9 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Spiner from './spiner'
+import Spiner from './spinner'
 
-export default function App(props) {
+export default function CircularSpinner(props) {
   const {
     dialWidth = 40,
     timeIn = 2000,
