@@ -27,6 +27,7 @@
   "files": [
     "lib"
   ],
+  "postinstall": "npx babel src --out-dir lib",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kasselTrankos/ats-components.git"

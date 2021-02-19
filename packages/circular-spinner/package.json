@@ -20,6 +20,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "postinstall": "npx babel src --out-dir lib",
   "dependencies": {
     "expo": "~40.0.0",
     "expo-splash-screen": "~0.8.0",
