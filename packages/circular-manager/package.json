@@ -27,7 +27,6 @@
   "files": [
     "lib"
   ],
-  "postinstall": "npx babel src --out-dir lib",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kasselTrankos/ats-components.git"
@@ -37,6 +36,7 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
+    "postinstall": "npx babel src --out-dir lib",
     "test": "jest"
   },
   "dependencies": {
