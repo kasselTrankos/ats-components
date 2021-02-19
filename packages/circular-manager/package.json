@@ -1,6 +1,6 @@
 {
   "name": "@ats-components/circular-manager",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "dist/App.js",
   "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/circular-manager#readme",
   "keywords": [
