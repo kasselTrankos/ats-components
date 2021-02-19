@@ -1,7 +1,7 @@
 {
   "name": "@ats-components/circular-manager",
   "version": "1.0.7",
-  "main": "lib/App.js",
+  "main": "dist/App.js",
   "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/circular-manager#readme",
   "keywords": [
     "circular",
@@ -36,7 +36,7 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "postinstall": "mkdir lib && npx @babel/cli App.js src --out-dir lib  --presets=@babel/preset-env",
+    "postinstall": "mkdir dist && npx @babel/cli App.js --out-dir dist  --presets=@babel/preset-env && npx @babel/cli src --out-dir dist/src  --presets=@babel/preset-env  && npx @babel/cli lib --out-dir dist/lib  --presets=@babel/preset-env",
     "test": "jest"
   },
   "dependencies": {

@@ -1,14 +1,14 @@
 {
   "name": "@ats-components/circular-spinner",
   "version": "1.0.8",
-  "main": "lib/indexApp.js",
+  "main": "dist/indexApp.js",
   "homepage": "https://github.com/kasselTrankos/ats-components/tree/master/packages/circular-spinner#readme",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "postinstall": "mkdir lib && npx @babel/cli App.js spinner.js --out-dir lib  --presets=@babel/preset-env",
+    "postinstall": "mkdir dist && npx @babel/cli App.js spinner.js --out-dir dist  --presets=@babel/preset-env",
     "test": "jest"
   },
   "command": {
