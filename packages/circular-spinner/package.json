@@ -8,7 +8,7 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "postinstall": "mkdir lib && npx @babel/cli App.js spiner.js --out-dir lib  --presets=@babel/preset-env",
+    "postinstall": "mkdir lib && npx @babel/cli App.js spinner.js --out-dir lib  --presets=@babel/preset-env",
     "test": "jest"
   },
   "command": {
